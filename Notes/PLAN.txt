@@ -29,7 +29,7 @@ Work plan:
 * Display field strength [DONE]
 * Particle charge [DONE]
 * Collision with unsplittable particles [DONE]
-* Particle mass
+* Particle mass [DONE]
 * Particle splitting
 * Particle spawning
 * Overhaul particle art

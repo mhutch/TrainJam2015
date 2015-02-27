@@ -35,20 +35,30 @@ namespace TrainJam2015
 	{
 		b2Body body;
 		CCSprite sprite;
+		b2Vec2 initialVelocity;
+		b2World world;
 
 		public Particle (b2World world, CCPoint position, b2Vec2 initialVelocity = default (b2Vec2))
 		{
+			this.world = world;
+			this.initialVelocity = initialVelocity;
 			Position = position;
 
+			Charge = 1;
+			Mass = 1;
+		}
+
+		public float Charge { get; set; }
+		public float Mass { get; set; }
+
+		protected override void AddedToScene ()
+		{
 			sprite = new CCSprite ("Particle");
 			AddChild (sprite);
 
 			var bodyDef = new b2BodyDef {
 				type = b2BodyType.b2_dynamicBody,
-				position = new b2Vec2 (
-					position.X / Consts.PhysicsScale,
-					position.Y / Consts.PhysicsScale
-				),
+				position = new b2Vec2 (Position.X, Position.Y) / Consts.PhysicsScale,
 				linearVelocity = initialVelocity / Consts.PhysicsScale
 			};
 
@@ -56,7 +66,7 @@ namespace TrainJam2015
 				shape = new b2CircleShape {
 					Radius = (sprite.ContentSize.Width / Consts.PhysicsScale) * 0.5f * 0.68f
 				},
-				density = 1.0f,
+				density = 0.0f,
 				friction = 0.0f,
 				restitution =  1.0f,
 			};
@@ -66,10 +76,9 @@ namespace TrainJam2015
 			body.UserData = this;
 			body.CreateFixture (fixtureDef);
 
-			Charge = 1;
+			// override mass, we don't care about density
+			body.SetMassData (new b2MassData { mass = Mass });
 		}
-
-		public float Charge { get; set; }
 
 		public void UpdateMagneticField (float field)
 		{
