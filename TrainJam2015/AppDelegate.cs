@@ -40,7 +40,7 @@ namespace TrainJam2015
 		public override void ApplicationDidFinishLaunching (CCApplication application, CCWindow mainWindow)
 		{
 			// Mac apps don't place items into subdirectory when they come from a shproj
-			#if !__MAC__
+			#if !MAC
 			application.ContentRootDirectory = "Content";
 			#endif
 
