@@ -52,14 +52,14 @@ namespace TrainJam2015
 			//TEST PARTICLES
 			//for some reason starting faster than 100 physics units per second breaks stuff
 
-			var p = new Particle (world, new CCPoint (screenSize.Center), new b2Vec2 (100, 0));
+			var p = new Particle (world, new CCPoint (screenSize.Center), new b2Vec2 (20, 0));
 			AddChild (p);
 
-			var p2 = new Particle (world, new CCPoint (screenSize.Center.X - 100, screenSize.Center.Y), new b2Vec2 (100, 0));
+			var p2 = new Particle (world, new CCPoint (screenSize.Center.X - 300, screenSize.Center.Y), new b2Vec2 (100, 0));
 			p2.Charge = 3f;
 			AddChild (p2);
 
-			var p3 = new Particle (world, new CCPoint (screenSize.Center.X - 200, screenSize.Center.Y), new b2Vec2 (100, 0));
+			var p3 = new Particle (world, new CCPoint (screenSize.Center.X - 400, screenSize.Center.Y), new b2Vec2 (100, 0));
 			p3.Charge = -2f;
 			AddChild (p3);
 

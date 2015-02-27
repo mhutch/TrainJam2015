@@ -27,9 +27,11 @@ Work plan:
 * Static magnetic field [DONE]
 * Controls for field [DONE]
 * Display field strength [DONE]
-* Additional particles
-* Collision with unsplittable particles
+* Particle charge [DONE]
+* Collision with unsplittable particles [DONE]
+* Particle mass
 * Particle splitting
+* Particle spawning
 * Overhaul particle art
 * Animated background
 * Cloud tracks

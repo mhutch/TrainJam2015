@@ -27,6 +27,7 @@
 using CocosSharp;
 using Box2D.Dynamics;
 using Box2D.Common;
+using Box2D.Collision.Shapes;
 
 namespace TrainJam2015
 {
@@ -42,15 +43,28 @@ namespace TrainJam2015
 			sprite = new CCSprite ("Particle");
 			AddChild (sprite);
 
-			var bodyDef = new b2BodyDef ();
-			bodyDef.type = b2BodyType.b2_dynamicBody;
-			bodyDef.position.x = position.X / Consts.PhysicsScale;
-			bodyDef.position.y = position.Y / Consts.PhysicsScale;
-			bodyDef.linearVelocity = initialVelocity / Consts.PhysicsScale;
+			var bodyDef = new b2BodyDef {
+				type = b2BodyType.b2_dynamicBody,
+				position = new b2Vec2 (
+					position.X / Consts.PhysicsScale,
+					position.Y / Consts.PhysicsScale
+				),
+				linearVelocity = initialVelocity / Consts.PhysicsScale
+			};
+
+			var fixtureDef = new b2FixtureDef {
+				shape = new b2CircleShape {
+					Radius = (sprite.ContentSize.Width / Consts.PhysicsScale) * 0.5f * 0.68f
+				},
+				density = 1.0f,
+				friction = 0.0f,
+				restitution =  1.0f,
+			};
 
 			body = world.CreateBody (bodyDef);
 			body.GravityScale = 0;
 			body.UserData = this;
+			body.CreateFixture (fixtureDef);
 
 			Charge = 1;
 		}
