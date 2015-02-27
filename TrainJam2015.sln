@@ -7,6 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrainJam2015.Windows", "Tra
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrainJam2015.Mac", "TrainJam2015.Mac\TrainJam2015.Mac.csproj", "{B3D71DEA-A648-4834-B26E-2F95FC5D6CB4}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notes", "Notes", "{A283F5C6-4E3F-45B5-8E02-5C18A98378D2}"
+	ProjectSection(SolutionItems) = preProject
+		Notes\PLAN.txt = Notes\PLAN.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -21,6 +26,8 @@ Global
 		{B3D71DEA-A648-4834-B26E-2F95FC5D6CB4}.Debug|x86.Build.0 = Debug|Any CPU
 		{B3D71DEA-A648-4834-B26E-2F95FC5D6CB4}.Release|x86.ActiveCfg = Release|Any CPU
 		{B3D71DEA-A648-4834-B26E-2F95FC5D6CB4}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		Policies = $0

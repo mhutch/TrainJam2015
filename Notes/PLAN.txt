@@ -1,0 +1,37 @@
+Theme: On Track
+
+Inspired by term found in dictionary - "cloud tracks" - the trails left by particles in a cloud chamber.
+
+Visual aesthetic - trails of bubbles behind particles as they go through the medium.
+
+Using CocosSharp as a dogfooding exercise since I've been working on MonoGame tooling.
+
+Working solo since from past experience having multiple programmers on a jam game is tricky
+to coordinate, and my ideas doesn't need much art. WIll go around later and look for artists
+and musicians with spare time.
+
+Have bounced ideas off a few people. Decided to take further ideas from the electric fields of
+particle detectors and the chain reactions of nuclear reactors.
+
+Aiming for a meditative game where you control magnetic fields to guide particles through
+a cloud chamber. They can collide with other particles, resulting in chan reactions
+
+Ideas will likely develop over time. Need to think about game driving mechanics - maybe scoring,
+or some kind of timed challenge system.
+
+Work plan:
+
+* Stub out the solution for Mac and Windows [DONE]
+* Get a window showing [DONE]
+* Get particle displaying in window
+* Static magnetic field
+* Controls for field
+* Additional particles
+* Collision with unsplittable particles
+* Particle splitting
+* Overhaul particle art
+* Animated background
+* Cloud tracks
+* Splash screen
+* Audio?
+* Credits
