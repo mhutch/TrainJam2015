@@ -50,6 +50,7 @@ namespace TrainJam2015
 			world.SetContinuousPhysics (true);
 
 			//TEST PARTICLES
+			//for some reason starting faster than 100 physics units per second breaks stuff
 
 			var p = new Particle (world, new CCPoint (screenSize.Center), new b2Vec2 (100, 0));
 			AddChild (p);
@@ -72,7 +73,7 @@ namespace TrainJam2015
 			for (var b = world.BodyList; b != null; b = b.Next) {
 				if (b.UserData != null) {
 					var node = ((CCNode)b.UserData);
-					node.Position = new CCPoint (b.Position.x, b.Position.y);
+					node.Position = new CCPoint (b.Position.x, b.Position.y) * Consts.PhysicsScale;
 					node.Rotation = -1 * CCMacros.CCRadiansToDegrees(b.Angle);
 					var p = node as Particle;
 					if (p != null) {

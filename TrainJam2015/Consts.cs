@@ -1,5 +1,5 @@
 ﻿//
-// Particle.cs
+// Consts.cs
 //
 // Author:
 //       Michael Hutchinson <m.j.hutchinson@gmail.com>
@@ -23,46 +23,21 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-
-using CocosSharp;
-using Box2D.Dynamics;
-using Box2D.Common;
+using System;
 
 namespace TrainJam2015
 {
-	public class Particle : CCNode
+	public static class Consts
 	{
-		b2Body body;
-		CCSprite sprite;
+		//how much bigger the real world is than the physics world
+		public const float PhysicsScale = 10;
 
-		public Particle (b2World world, CCPoint position, b2Vec2 initialVelocity = default (b2Vec2))
-		{
-			Position = position;
+		//how strong the magnetic field is
+		public const float FieldScale = 10;
 
-			sprite = new CCSprite ("Particle");
-			AddChild (sprite);
+		//what proportion of range field can change per second
+		public const float FieldChangeRate = 0.5f;
 
-			var bodyDef = new b2BodyDef ();
-			bodyDef.type = b2BodyType.b2_dynamicBody;
-			bodyDef.position.x = position.X / Consts.PhysicsScale;
-			bodyDef.position.y = position.Y / Consts.PhysicsScale;
-			bodyDef.linearVelocity = initialVelocity / Consts.PhysicsScale;
-
-			body = world.CreateBody (bodyDef);
-			body.GravityScale = 0;
-			body.UserData = this;
-
-			Charge = 1;
-		}
-
-		public float Charge { get; set; }
-
-		public void UpdateMagneticField (float field)
-		{
-			body.Force = b2Vec2.Zero;
-			var force = field * body.LinearVelocity.UnitCross () * Charge * Consts.FieldScale;
-			body.ApplyForceToCenter (force);
-		}
 	}
 }
 

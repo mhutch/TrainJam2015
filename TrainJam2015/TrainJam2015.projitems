@@ -13,6 +13,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Particle.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CloudChamber.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MainScene.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Consts.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Content\" />

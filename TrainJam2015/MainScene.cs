@@ -30,11 +30,6 @@ namespace TrainJam2015
 {
 	public class MainScene : CCScene
 	{
-		//for some reason starting faster than 100 breaks stuff
-		const float startSpeed = 100f;
-		const float fieldScaleRate = 3.0f; // field units per second
-		const float fieldMax = 10f;
-
 		readonly CloudChamber cloudChamber;
 		readonly CCSprite fieldIndicator;
 
@@ -88,8 +83,8 @@ namespace TrainJam2015
 				return;
 			}
 
-			var strength = cloudChamber.FieldStrength + fieldScaleRate * dt;
-			cloudChamber.FieldStrength = CCMathHelper.Clamp (strength, -fieldMax, fieldMax);
+			var strength = cloudChamber.FieldStrength + Consts.FieldChangeRate * dt;
+			cloudChamber.FieldStrength = CCMathHelper.Clamp (strength, -1, 1);
 
 			UpdateFieldIndicator ();
 		}
@@ -99,7 +94,7 @@ namespace TrainJam2015
 			bool negative = cloudChamber.FieldStrength < 0;
 
 			const float scale = 4;
-			float unitField = (float) Math.Abs (cloudChamber.FieldStrength / fieldMax);
+			float unitField = (float) Math.Abs (cloudChamber.FieldStrength);
 			fieldIndicator.ScaleX = unitField * scale;
 
 			float x = fieldIndicator.ContentSize.Width * scale;
