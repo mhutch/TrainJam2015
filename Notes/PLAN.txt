@@ -19,6 +19,10 @@ a cloud chamber. They can collide with other particles, resulting in chan reacti
 Ideas will likely develop over time. Need to think about game driving mechanics - maybe scoring,
 or some kind of timed challenge system.
 
+Fusion?
+
+Sounds - pure tones based on the particles?
+
 Work plan:
 
 * Stub out the solution for Mac and Windows [DONE]
@@ -30,7 +34,7 @@ Work plan:
 * Particle charge [DONE]
 * Collision with unsplittable particles [DONE]
 * Particle mass [DONE]
-* Particle splitting
+* Particle splitting [DONE]
 * Particle spawning
 * Overhaul particle art
 * Animated background

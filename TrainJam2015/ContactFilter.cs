@@ -1,5 +1,5 @@
-﻿//
-// Consts.cs
+//
+// CloudChamber.cs
 //
 // Author:
 //       Michael Hutchinson <m.j.hutchinson@gmail.com>
@@ -23,22 +23,28 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-using System;
+
+using Box2D.Dynamics;
 
 namespace TrainJam2015
 {
-	public static class Consts
+	class ContactFilter : b2ContactFilter
 	{
-		//how much bigger the real world is than the physics world
-		public const float PhysicsScale = 10;
+		public override bool ShouldCollide (b2Fixture fixtureA, b2Fixture fixtureB)
+		{
+			var a = (Particle) fixtureA.Body.UserData;
+			var b = (Particle) fixtureB.Body.UserData;
 
-		//how strong the magnetic field is
-		public const float FieldScale = 10;
+			if (a == null || b == null) {
+				return false;
+			}
 
-		//what proportion of range field can change per second
-		public const float FieldChangeRate = 0.5f;
+			if (a.Age < Consts.ExplosionImmunityTime || b.Age < Consts.ExplosionImmunityTime) {
+				return false;
+			}
 
-		public const float ExplosionImmunityTime = 1.0f;
+			return base.ShouldCollide (fixtureA, fixtureB);
+		}
 	}
 }
 

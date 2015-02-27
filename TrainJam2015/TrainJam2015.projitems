@@ -15,6 +15,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)MainScene.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Consts.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Exploder.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ContactFilter.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Content\" />

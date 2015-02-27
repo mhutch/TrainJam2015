@@ -52,6 +52,8 @@ namespace TrainJam2015
 		public float Mass { get; set; }
 		public bool IsUnstable { get; set; }
 
+		public float Age { get; set; }
+
 		protected override void AddedToScene ()
 		{
 			sprite = new CCSprite ("Particle");
@@ -106,17 +108,14 @@ namespace TrainJam2015
 
 		public void Explode ()
 		{
-			//warp particles away so they don't immediately re-explode
-			float warp = sprite.ContentSize.Width / 2f * 1.2f;
-
 			var c = Chamber;
 			var v = body.LinearVelocity;
 			var p = Position;
 
 			Destroy ();
 
-			c.AddParticle (p + new CCPoint (0, warp), v + new b2Vec2 (0, 100), 1, isUnstable: true);
-			c.AddParticle (p + new CCPoint (0, -warp), v + new b2Vec2 (0, -100), -1, isUnstable: true);
+			c.AddParticle (p, v + new b2Vec2 (0, 100), 1, isUnstable: true);
+			c.AddParticle (p, v + new b2Vec2 (0, -100), -1, isUnstable: true);
 		}
 	}
 }

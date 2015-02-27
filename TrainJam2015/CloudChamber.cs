@@ -52,6 +52,7 @@ namespace TrainJam2015
 			world.SetContinuousPhysics (true);
 
 			world.SetContactListener (new Exploder ());
+			world.SetContactFilter (new ContactFilter ());
 
 			//TEST PARTICLES
 			//for some reason starting faster than 100 physics units per second breaks stuff
@@ -97,6 +98,7 @@ namespace TrainJam2015
 					var p = (Particle)node;
 					if (p != null) {
 						p.UpdateMagneticField (FieldStrength);
+						p.Age += dt;
 					}
 				}
 			}
