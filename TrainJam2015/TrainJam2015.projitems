@@ -19,9 +19,16 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Content\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Content\Audio\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="$(MSBuildThisFileDirectory)Content\Particle.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\field-indicator.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)Content\Audio\tone1.mp3" />
+    <None Include="$(MSBuildThisFileDirectory)Content\Audio\tone4.mp3" />
+    <None Include="$(MSBuildThisFileDirectory)Content\Audio\tone5.mp3" />
+    <None Include="$(MSBuildThisFileDirectory)Content\Audio\tone8.mp3" />
   </ItemGroup>
 </Project>
