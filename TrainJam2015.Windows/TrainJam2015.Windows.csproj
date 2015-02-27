@@ -29,6 +29,7 @@
     <ConsolePause>false</ConsolePause>
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
+  <Import Project="..\TrainJam2015\TrainJam2015.projitems" Label="Shared" Condition="Exists('..\TrainJam2015\TrainJam2015.projitems')" />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Reference Include="BitMiracle.LibTiff.NET">
