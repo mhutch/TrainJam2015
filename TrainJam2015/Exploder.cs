@@ -28,6 +28,10 @@ using System;
 using Box2D.Dynamics;
 using Box2D.Dynamics.Contacts;
 using Box2D.Collision;
+using CocosSharp;
+using Box2D.Common;
+using System.Linq;
+using Microsoft.Xna.Framework;
 
 namespace TrainJam2015
 {
@@ -55,11 +59,11 @@ namespace TrainJam2015
 		void Explode (Particle a, Particle b)
 		{
 			if (a.IsUnstable) {
-				CreateChildren (a);
+				CreateChildren (a, b);
 			}
 
 			if (b.IsUnstable) {
-				CreateChildren (b);
+				CreateChildren (b, a);
 			}
 
 			if (a.IsUnstable) {
@@ -71,14 +75,35 @@ namespace TrainJam2015
 			}
 		}
 
-		void CreateChildren (Particle a)
+		void CreateChildren (Particle a, Particle b)
 		{
 			var v = a.Body.LinearVelocity;
-			var vcross = a.Body.LinearVelocity.UnitCross ();
-			vcross.Normalize ();
-			vcross *= 200;
-			a.Chamber.AddParticle (a.Data, a.Position, v + vcross);
-			a.Chamber.AddParticle (a.Data, a.Position, v - vcross);
+			var children = a.Data.Children;
+
+			var momentum = a.Body.LinearVelocity * a.Mass;
+
+			var combinedVel = (a.Body.LinearVelocity * a.Mass + b.Body.LinearVelocity * b.Mass) / (a.Mass + b.Mass);
+			combinedVel.Normalize ();
+
+			const float halfPi = CCMathHelper.Pi / 2f;
+			var direction = CCVector2.AngleOf (new CCVector2 (combinedVel.x, combinedVel.y));
+			direction += halfPi;
+
+			float rotationPerChild = CCMathHelper.TwoPi / (float)children.Length;
+
+			var combinedChildMass = children.Sum (c => c.Mass);
+			var momentumPerUnitChildMass = momentum / combinedChildMass;
+
+			foreach (var c in children) {
+				var dirVector = new b2Vec2 ((float)Math.Cos (direction), (float)Math.Sin (direction));
+				dirVector.Normalize ();
+
+				//TODO: consistent energy and mass conservation for children
+				const float childSpeed = 200f;
+
+				a.Chamber.AddParticle (c, a.Position, momentumPerUnitChildMass * c.Mass + dirVector * childSpeed);
+				direction += rotationPerChild;
+			}
 		}
 
 		public override void PreSolve (b2Contact contact, b2Manifold oldManifold)
