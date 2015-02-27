@@ -31,7 +31,7 @@ using System.Collections.Generic;
 
 namespace TrainJam2015
 {
-	public class CloudChamber : CCLayer
+	class CloudChamber : CCLayer
 	{
 		b2World world;
 		CCSize screenSize;
@@ -59,20 +59,17 @@ namespace TrainJam2015
 
 			var center = screenSize.Center;
 
-			AddParticle (center, new b2Vec2 (50, 0), isUnstable: true);
-			AddParticle (center + new CCPoint (-300, 0), new b2Vec2 (200, 0), 3, 2);
-	//		AddParticle (center + new CCPoint (-400, 0), new b2Vec2 (100, 0), -2);
+			var d = ParticleData.A;
+			AddParticle (d, center, new b2Vec2 (50, 0));
+			AddParticle (d, center + new CCPoint (-300, 0), new b2Vec2 (200, 0));
+	//		AddParticle (d, center + new CCPoint (-400, 0), new b2Vec2 (100, 0), -2);
 
 			Schedule (Tick);
 		}
 
-		public Particle AddParticle (CCPoint position, b2Vec2 velocity, float charge = 1, float mass = 1, bool isUnstable = false)
+		public Particle AddParticle (ParticleData data, CCPoint position, b2Vec2 velocity)
 		{
-			var p = new Particle (world, position, velocity) {
-				Mass = mass,
-				Charge = charge,
-				IsUnstable = isUnstable,
-			};
+			var p = new Particle (world, data, position, velocity);
 
 			if (world.IsLocked) {
 				particlesToAdd.Enqueue (p);

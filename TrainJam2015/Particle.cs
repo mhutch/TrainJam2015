@@ -31,34 +31,33 @@ using Box2D.Collision.Shapes;
 
 namespace TrainJam2015
 {
-	public class Particle : CCNode
+	class Particle : CCNode
 	{
-		b2Body body;
 		CCSprite sprite;
 		b2Vec2 initialVelocity;
 		b2World world;
 
-		public Particle (b2World world, CCPoint position, b2Vec2 initialVelocity = default (b2Vec2))
+		public Particle (b2World world, ParticleData data, CCPoint position, b2Vec2 initialVelocity = default (b2Vec2))
 		{
+			Data = data;
 			this.world = world;
 			this.initialVelocity = initialVelocity;
 			Position = position;
-
-			Charge = 1;
-			Mass = 1;
 		}
 
-		public float Charge { get; set; }
-		public float Mass { get; set; }
-		public bool IsUnstable { get; set; }
+		public ParticleData Data { get; private set; }
 
 		public float Age { get; set; }
 
-		public b2Body Body { get { return body; } }
+		public b2Body Body { get; private set; }
+
+		public float Charge { get { return Data.Charge; } }
+		public float Mass { get { return Data.Mass; } }
+		public bool IsUnstable { get { return Data.IsUnstable; } }
 
 		protected override void AddedToScene ()
 		{
-			sprite = new CCSprite ("Particle");
+			sprite = new CCSprite (Data.Image);
 			sprite.Scale = 0.5f;
 			AddChild (sprite);
 
@@ -77,23 +76,23 @@ namespace TrainJam2015
 				restitution =  1.0f,
 			};
 
-			body = world.CreateBody (bodyDef);
-			body.GravityScale = 0;
-			body.UserData = this;
-			body.CreateFixture (fixtureDef);
+			Body = world.CreateBody (bodyDef);
+			Body.GravityScale = 0;
+			Body.UserData = this;
+			Body.CreateFixture (fixtureDef);
 
 			// override mass, we don't care about density
-			body.SetMassData (new b2MassData { mass = Mass });
+			Body.SetMassData (new b2MassData { mass = Mass });
 		}
 
 		public void UpdateMagneticField (float field)
 		{
-			if (body == null) {
+			if (Body == null) {
 				return;
 			}
-			body.Force = b2Vec2.Zero;
-			var force = field * body.LinearVelocity.UnitCross () * Charge * Consts.FieldScale;
-			body.ApplyForceToCenter (force);
+			Body.Force = b2Vec2.Zero;
+			var force = field * Body.LinearVelocity.UnitCross () * Charge * Consts.FieldScale;
+			Body.ApplyForceToCenter (force);
 		}
 
 		public CloudChamber Chamber {
@@ -104,10 +103,29 @@ namespace TrainJam2015
 		{
 			RemoveFromParent ();
 			sprite = null;
-			world.DestroyBody (body);
-			body.UserData = null;
-			body = null;
+			world.DestroyBody (Body);
+			Body.UserData = null;
+			Body = null;
 		}
+	}
+
+	class ParticleData
+	{
+		public ParticleData (float charge, float mass, bool isUnstable, string image)
+		{
+			Charge = charge;
+			Mass = mass;
+			IsUnstable = isUnstable;
+			Image = image;
+		}
+
+		public float Charge { get; private set; }
+		public float Mass { get; private set; }
+		public bool IsUnstable { get; private set; }
+		public string Image {get; private set; }
+
+		public static readonly ParticleData A = new ParticleData (1, 1, true, "Particle");
+		public static readonly ParticleData B = new ParticleData (1, 1, false, "Particle");
 	}
 }
 

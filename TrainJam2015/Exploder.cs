@@ -27,6 +27,7 @@
 using System;
 using Box2D.Dynamics;
 using Box2D.Dynamics.Contacts;
+using Box2D.Collision;
 
 namespace TrainJam2015
 {
@@ -76,11 +77,11 @@ namespace TrainJam2015
 			var vcross = a.Body.LinearVelocity.UnitCross ();
 			vcross.Normalize ();
 			vcross *= 200;
-			a.Chamber.AddParticle (a.Position, v + vcross, 1, isUnstable: true);
-			a.Chamber.AddParticle (a.Position, v - vcross, -1, isUnstable: true);
+			a.Chamber.AddParticle (a.Data, a.Position, v + vcross);
+			a.Chamber.AddParticle (a.Data, a.Position, v - vcross);
 		}
 
-		public override void PreSolve (b2Contact contact, Box2D.Collision.b2Manifold oldManifold)
+		public override void PreSolve (b2Contact contact, b2Manifold oldManifold)
 		{
 		}
 
