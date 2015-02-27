@@ -30,6 +30,8 @@ namespace TrainJam2015
 {
 	class AppDelegate : CCApplicationDelegate
 	{
+		public static CCApplication Application { get; private set; }
+
 		public AppDelegate ()
 		{
 			#if DEBUG
@@ -39,6 +41,8 @@ namespace TrainJam2015
 
 		public override void ApplicationDidFinishLaunching (CCApplication application, CCWindow mainWindow)
 		{
+			Application = application;
+
 			// Mac apps don't place items into subdirectory when they come from a shproj
 			#if !MAC
 			application.ContentRootDirectory = "Content";

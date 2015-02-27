@@ -101,6 +101,10 @@ namespace TrainJam2015
 		void OnKeyEvent (CCEventKeyboard evt)
 		{
 			lastKeyboardState = evt.KeyboardState;
+
+			if (evt.KeyboardState.IsKeyDown (CCKeys.Escape)) {
+				AppDelegate.Application.ExitGame ();
+			}
 		}
 
 		void UpdateField (float dt)
