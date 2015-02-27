@@ -49,8 +49,18 @@ namespace TrainJam2015
 			};
 			world.SetContinuousPhysics (true);
 
+			//TEST PARTICLES
+
 			var p = new Particle (world, new CCPoint (screenSize.Center), new b2Vec2 (100, 0));
 			AddChild (p);
+
+			var p2 = new Particle (world, new CCPoint (screenSize.Center.X - 100, screenSize.Center.Y), new b2Vec2 (100, 0));
+			p2.Charge = 3f;
+			AddChild (p2);
+
+			var p3 = new Particle (world, new CCPoint (screenSize.Center.X - 200, screenSize.Center.Y), new b2Vec2 (100, 0));
+			p3.Charge = -2f;
+			AddChild (p3);
 
 			Schedule (Tick);
 		}
@@ -64,21 +74,12 @@ namespace TrainJam2015
 					var node = ((CCNode)b.UserData);
 					node.Position = new CCPoint (b.Position.x, b.Position.y);
 					node.Rotation = -1 * CCMacros.CCRadiansToDegrees(b.Angle);
-					UpdateMagneticForce (b);
+					var p = node as Particle;
+					if (p != null) {
+						p.UpdateMagneticField (FieldStrength);
+					}
 				}
 			}
-
-		}
-
-		void UpdateMagneticForce (b2Body body)
-		{
-			var particle = body.UserData as Particle;
-			if (particle == null) {
-				return;
-			}
-			body.Force = b2Vec2.Zero;
-			var force = FieldStrength * body.LinearVelocity.UnitCross ();
-			body.ApplyForceToCenter (force);
 		}
 
 		public float FieldStrength { get; set; }

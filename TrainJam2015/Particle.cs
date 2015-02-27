@@ -32,14 +32,12 @@ namespace TrainJam2015
 {
 	public class Particle : CCNode
 	{
-		b2World world;
 		b2Body body;
 		CCSprite sprite;
 
 		public Particle (b2World world, CCPoint position, b2Vec2 initialVelocity = default (b2Vec2))
 		{
 			Position = position;
-			this.world = world;
 
 			sprite = new CCSprite ("Particle");
 			AddChild (sprite);
@@ -53,6 +51,17 @@ namespace TrainJam2015
 			body = world.CreateBody (bodyDef);
 			body.GravityScale = 0;
 			body.UserData = this;
+
+			Charge = 1;
+		}
+
+		public float Charge { get; set; }
+
+		public void UpdateMagneticField (float field)
+		{
+			body.Force = b2Vec2.Zero;
+			var force = field * body.LinearVelocity.UnitCross () * Charge;
+			body.ApplyForceToCenter (force);
 		}
 	}
 }
