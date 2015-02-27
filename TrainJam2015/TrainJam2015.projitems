@@ -12,6 +12,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)AppDelegate.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Particle.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CloudChamber.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MainScene.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Content\" />

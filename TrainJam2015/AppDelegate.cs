@@ -48,14 +48,7 @@ namespace TrainJam2015
 			application.ContentRootDirectory = "Content";
 			#endif
 
-			var resolution = new CCSize (
-				application.MainWindow.WindowSizeInPixels.Width,
-				application.MainWindow.WindowSizeInPixels.Height
-			);
-
-			var scene = new CCScene (mainWindow);
-			scene.AddChild (new CloudChamber (resolution));
-
+			var scene = new MainScene (mainWindow);
 			mainWindow.RunWithScene (scene);
 		}
 	}

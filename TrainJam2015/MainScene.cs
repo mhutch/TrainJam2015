@@ -1,5 +1,5 @@
 ﻿//
-// CloudChamber.cs
+// MainScene.cs
 //
 // Author:
 //       Michael Hutchinson <m.j.hutchinson@gmail.com>
@@ -23,65 +23,70 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-
+using System;
 using CocosSharp;
-using Box2D.Dynamics;
-using Box2D.Common;
+using Microsoft.Xna.Framework;
 
 namespace TrainJam2015
 {
-	public class CloudChamber : CCLayer
+	public class MainScene : CCScene
 	{
-		b2World world;
-		CCSize screenSize;
+		//for some reason starting faster than 100 breaks stuff
+		const float startSpeed = 100f;
+		const float fieldScaleRate = 0.5f; // field units per second
+		const float fieldMax = 10f;
 
-		public CloudChamber (CCSize size) : base (size)
+		readonly CloudChamber cloudChamber;
+
+		CCKeyboardState? lastKeyboardState;
+
+		public MainScene (CCWindow mainWindow) : base (mainWindow)
 		{
-			screenSize = size;
-		}
+			var resolution = new CCSize (
+				mainWindow.WindowSizeInPixels.Width,
+				mainWindow.WindowSizeInPixels.Height
+			);
 
-		protected override void AddedToScene ()
-		{
-			base.AddedToScene ();
+			cloudChamber = new CloudChamber (resolution);
+			AddChild (cloudChamber);
 
-			world = new b2World (b2Vec2.Zero) {
-				AllowSleep = false,
-			};
-			world.SetContinuousPhysics (true);
-
-			var p = new Particle (world, new CCPoint (screenSize.Center), new b2Vec2 (100, 0));
-			AddChild (p);
+			AddEventListener (new CCEventListenerKeyboard {
+				OnKeyPressed = OnKeyEvent,
+				OnKeyReleased = OnKeyEvent
+			});
 
 			Schedule (Tick);
 		}
 
 		void Tick (float dt)
 		{
-			world.Step (dt, 8, 1);
-
-			for (var b = world.BodyList; b != null; b = b.Next) {
-				if (b.UserData != null) {
-					var node = ((CCNode)b.UserData);
-					node.Position = new CCPoint (b.Position.x, b.Position.y);
-					node.Rotation = -1 * CCMacros.CCRadiansToDegrees(b.Angle);
-					UpdateMagneticForce (b);
-				}
-			}
-
+			UpdateField (dt);
 		}
 
-		void UpdateMagneticForce (b2Body body)
+		void OnKeyEvent (CCEventKeyboard evt)
 		{
-			var particle = body.UserData as Particle;
-			if (particle == null) {
+			lastKeyboardState = evt.KeyboardState;
+
+			if (evt.KeyboardState.IsKeyDown (CCKeys.Escape)) {
+				AppDelegate.Application.ExitGame ();
+			}
+		}
+
+		void UpdateField (float dt)
+		{
+			if (!lastKeyboardState.HasValue)
+				return;
+
+			var kb = lastKeyboardState.Value;
+			if (kb.IsKeyDown (CCKeys.Down)) {
+				dt = -dt;
+			} else if (!kb.IsKeyDown (CCKeys.Up)) {
 				return;
 			}
-			body.Force = b2Vec2.Zero;
-			var force = FieldStrength * body.LinearVelocity.UnitCross ();
-			body.ApplyForceToCenter (force);
-		}
 
-		public float FieldStrength { get; set; }
+			var strength = cloudChamber.FieldStrength + fieldScaleRate * dt;
+			cloudChamber.FieldStrength = CCMathHelper.Clamp (strength, -fieldMax, fieldMax);
+		}
 	}
 }
 
