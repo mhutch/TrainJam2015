@@ -50,6 +50,7 @@ namespace TrainJam2015
 
 		public float Charge { get; set; }
 		public float Mass { get; set; }
+		public bool IsUnstable { get; set; }
 
 		protected override void AddedToScene ()
 		{
@@ -82,9 +83,40 @@ namespace TrainJam2015
 
 		public void UpdateMagneticField (float field)
 		{
+			if (body == null) {
+				return;
+			}
 			body.Force = b2Vec2.Zero;
 			var force = field * body.LinearVelocity.UnitCross () * Charge * Consts.FieldScale;
 			body.ApplyForceToCenter (force);
+		}
+
+		public CloudChamber Chamber {
+			get { return (CloudChamber) Parent; }
+		}
+
+		public void Destroy ()
+		{
+			RemoveFromParent ();
+			sprite = null;
+			world.DestroyBody (body);
+			body.UserData = null;
+			body = null;
+		}
+
+		public void Explode ()
+		{
+			//warp particles away so they don't immediately re-explode
+			float warp = sprite.ContentSize.Width / 2f * 1.2f;
+
+			var c = Chamber;
+			var v = body.LinearVelocity;
+			var p = Position;
+
+			Destroy ();
+
+			c.AddParticle (p + new CCPoint (0, warp), v + new b2Vec2 (0, 100), 1, isUnstable: true);
+			c.AddParticle (p + new CCPoint (0, -warp), v + new b2Vec2 (0, -100), -1, isUnstable: true);
 		}
 	}
 }

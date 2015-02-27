@@ -27,6 +27,7 @@
 using CocosSharp;
 using Box2D.Dynamics;
 using Box2D.Common;
+using System.Collections.Generic;
 
 namespace TrainJam2015
 {
@@ -34,6 +35,7 @@ namespace TrainJam2015
 	{
 		b2World world;
 		CCSize screenSize;
+		Queue<Particle> particlesToAdd = new Queue<Particle> ();
 
 		public CloudChamber (CCSize size) : base (size)
 		{
@@ -49,27 +51,42 @@ namespace TrainJam2015
 			};
 			world.SetContinuousPhysics (true);
 
+			world.SetContactListener (new Exploder ());
+
 			//TEST PARTICLES
 			//for some reason starting faster than 100 physics units per second breaks stuff
 
-			var p = new Particle (world, new CCPoint (screenSize.Center), new b2Vec2 (20, 0));
-			p.Mass = 1;
-			AddChild (p);
+			var center = screenSize.Center;
 
-			var p2 = new Particle (world, new CCPoint (screenSize.Center.X - 300, screenSize.Center.Y), new b2Vec2 (100, 0));
-			p2.Charge = 3f;
-			p2.Mass = 2;
-			AddChild (p2);
-
-			var p3 = new Particle (world, new CCPoint (screenSize.Center.X - 400, screenSize.Center.Y), new b2Vec2 (100, 0));
-			p3.Charge = -2f;
-			AddChild (p3);
+			AddParticle (center, new b2Vec2 (20, 0), isUnstable: true);
+			AddParticle (center + new CCPoint (-300, 0), new b2Vec2 (100, 0), 3, 2);
+	//		AddParticle (center + new CCPoint (-400, 0), new b2Vec2 (100, 0), -2);
 
 			Schedule (Tick);
 		}
 
+		public Particle AddParticle (CCPoint position, b2Vec2 velocity, float charge = 1, float mass = 1, bool isUnstable = false)
+		{
+			var p = new Particle (world, position, velocity) {
+				Mass = mass,
+				Charge = charge,
+				IsUnstable = isUnstable,
+			};
+
+			if (world.IsLocked) {
+				particlesToAdd.Enqueue (p);
+			} else {
+				AddChild (p);
+			}
+			return p;
+		}
+
 		void Tick (float dt)
 		{
+			while (particlesToAdd.Count > 0) {
+				AddChild (particlesToAdd.Dequeue ());
+			}
+
 			world.Step (dt, 8, 1);
 
 			for (var b = world.BodyList; b != null; b = b.Next) {
@@ -77,7 +94,7 @@ namespace TrainJam2015
 					var node = ((CCNode)b.UserData);
 					node.Position = new CCPoint (b.Position.x, b.Position.y) * Consts.PhysicsScale;
 					node.Rotation = -1 * CCMacros.CCRadiansToDegrees(b.Angle);
-					var p = node as Particle;
+					var p = (Particle)node;
 					if (p != null) {
 						p.UpdateMagneticField (FieldStrength);
 					}
