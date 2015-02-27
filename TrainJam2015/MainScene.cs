@@ -77,9 +77,9 @@ namespace TrainJam2015
 				return;
 
 			var kb = lastKeyboardState.Value;
-			if (kb.IsKeyDown (CCKeys.Down)) {
+			if (kb.IsKeyDown (CCKeys.Down) || kb.IsKeyDown (CCKeys.Left)) {
 				dt = -dt;
-			} else if (!kb.IsKeyDown (CCKeys.Up)) {
+			} else if (!(kb.IsKeyDown (CCKeys.Up) || kb.IsKeyDown (CCKeys.Right))) {
 				return;
 			}
 
