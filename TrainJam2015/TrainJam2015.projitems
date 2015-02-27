@@ -19,5 +19,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="$(MSBuildThisFileDirectory)Content\Particle.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\field-indicator.png" />
   </ItemGroup>
 </Project>

@@ -26,7 +26,7 @@ Work plan:
 * Get particle displaying in window [DONE]
 * Static magnetic field [DONE]
 * Controls for field [DONE]
-* Display field strength
+* Display field strength [DONE]
 * Additional particles
 * Collision with unsplittable particles
 * Particle splitting

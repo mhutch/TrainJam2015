@@ -25,7 +25,6 @@
 // THE SOFTWARE.
 using System;
 using CocosSharp;
-using Microsoft.Xna.Framework;
 
 namespace TrainJam2015
 {
@@ -33,10 +32,11 @@ namespace TrainJam2015
 	{
 		//for some reason starting faster than 100 breaks stuff
 		const float startSpeed = 100f;
-		const float fieldScaleRate = 0.5f; // field units per second
+		const float fieldScaleRate = 3.0f; // field units per second
 		const float fieldMax = 10f;
 
 		readonly CloudChamber cloudChamber;
+		readonly CCSprite fieldIndicator;
 
 		CCKeyboardState? lastKeyboardState;
 
@@ -54,6 +54,10 @@ namespace TrainJam2015
 				OnKeyPressed = OnKeyEvent,
 				OnKeyReleased = OnKeyEvent
 			});
+
+			fieldIndicator = new CCSprite ("field-indicator");
+			UpdateFieldIndicator ();
+			AddChild (fieldIndicator);
 
 			Schedule (Tick);
 		}
@@ -86,6 +90,26 @@ namespace TrainJam2015
 
 			var strength = cloudChamber.FieldStrength + fieldScaleRate * dt;
 			cloudChamber.FieldStrength = CCMathHelper.Clamp (strength, -fieldMax, fieldMax);
+
+			UpdateFieldIndicator ();
+		}
+
+		void UpdateFieldIndicator ()
+		{
+			bool negative = cloudChamber.FieldStrength < 0;
+
+			const float scale = 4;
+			float unitField = (float) Math.Abs (cloudChamber.FieldStrength / fieldMax);
+			fieldIndicator.ScaleX = unitField * scale;
+
+			float x = fieldIndicator.ContentSize.Width * scale;
+			if (negative) {
+				x -= fieldIndicator.ScaledContentSize.Width / 2;
+			} else {
+				x += fieldIndicator.ScaledContentSize.Width / 2;
+			}
+
+			fieldIndicator.Position = new CCPoint (x, 0);
 		}
 	}
 }
