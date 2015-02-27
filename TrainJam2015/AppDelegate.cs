@@ -30,6 +30,13 @@ namespace TrainJam2015
 {
 	class AppDelegate : CCApplicationDelegate
 	{
+		public AppDelegate ()
+		{
+			#if DEBUG
+			CCLog.CustomCCLog = new LogWrapper (Console.WriteLine);
+			#endif
+		}
+
 		public override void ApplicationDidFinishLaunching (CCApplication application, CCWindow mainWindow)
 		{
 			// Mac apps don't place items into subdirectory when they come from a shproj
@@ -46,6 +53,26 @@ namespace TrainJam2015
 			scene.AddChild (new CloudChamber (resolution));
 
 			mainWindow.RunWithScene (scene);
+		}
+	}
+
+	class LogWrapper : ICCLog
+	{
+		readonly Action<string> write;
+
+		public LogWrapper (Action<string> write)
+		{
+			this.write = write;
+		}
+
+		public void Log (string message)
+		{
+			write (message);
+		}
+
+		public void Log (string format, params object[] args)
+		{
+			write (string.Format (format, args));
 		}
 	}
 }
