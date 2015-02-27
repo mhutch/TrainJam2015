@@ -39,5 +39,7 @@ namespace TrainJam2015
 		public const float FieldChangeRate = 0.5f;
 
 		public const float ExplosionImmunityTime = 1.0f;
+
+		public const float BaseParticleSize = 32f;
 	}
 }

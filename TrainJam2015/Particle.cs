@@ -28,6 +28,7 @@ using CocosSharp;
 using Box2D.Dynamics;
 using Box2D.Common;
 using Box2D.Collision.Shapes;
+using System;
 
 namespace TrainJam2015
 {
@@ -35,7 +36,7 @@ namespace TrainJam2015
 	{
 		CCSprite sprite;
 		b2Vec2 initialVelocity;
-		b2World world;
+		readonly b2World world;
 
 		public Particle (b2World world, ParticleData data, CCPoint position, b2Vec2 initialVelocity = default (b2Vec2))
 		{
@@ -58,7 +59,10 @@ namespace TrainJam2015
 		protected override void AddedToScene ()
 		{
 			sprite = new CCSprite (Data.Image);
-			sprite.Scale = 0.5f;
+			var scale = Consts.BaseParticleSize / sprite.ContentSize.Width;
+
+			sprite.Scale = scale;
+
 			AddChild (sprite);
 
 			var bodyDef = new b2BodyDef {
@@ -111,21 +115,32 @@ namespace TrainJam2015
 
 	class ParticleData
 	{
-		public ParticleData (float charge, float mass, bool isUnstable, string image)
+		public ParticleData (float charge, float mass, string image)
 		{
+			if (image == null)
+				throw new ArgumentNullException ("image");
+			if (mass <= 0)
+				throw new ArgumentException ("Massless particles not allowed");
+
 			Charge = charge;
 			Mass = mass;
-			IsUnstable = isUnstable;
 			Image = image;
 		}
 
 		public float Charge { get; private set; }
 		public float Mass { get; private set; }
-		public bool IsUnstable { get; private set; }
 		public string Image {get; private set; }
+		public ParticleData[] Children { get; private set; }
 
-		public static readonly ParticleData A = new ParticleData (1, 1, true, "Particle");
-		public static readonly ParticleData B = new ParticleData (1, 1, false, "Particle");
+		public bool IsUnstable { get { return Children != null; } }
+
+		public static readonly ParticleData A = new ParticleData (1, 1, "particle-red");
+		public static readonly ParticleData B = new ParticleData (-1, 1, "particle-blue");
+
+		static ParticleData ()
+		{
+			A.Children = new[] { A, B };
+		}
 	}
 }
 
