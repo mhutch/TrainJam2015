@@ -32,7 +32,20 @@ namespace TrainJam2015
 	{
 		public override void ApplicationDidFinishLaunching (CCApplication application, CCWindow mainWindow)
 		{
-		//	base.ApplicationDidFinishLaunching (application, mainWindow);
+			// Mac apps don't place items into subdirectory when they come from a shproj
+			#if !__MAC__
+			application.ContentRootDirectory = "Content";
+			#endif
+
+			var resolution = new CCSize (
+				application.MainWindow.WindowSizeInPixels.Width,
+				application.MainWindow.WindowSizeInPixels.Height
+			);
+
+			var scene = new CCScene (mainWindow);
+			scene.AddChild (new CloudChamber (resolution));
+
+			mainWindow.RunWithScene (scene);
 		}
 	}
 }
