@@ -90,17 +90,15 @@ namespace TrainJam2015
 
 			world.Step (dt, 8, 1);
 
-			for (var b = world.BodyList; b != null; b = b.Next) {
-				if (b.UserData != null) {
-					var node = ((CCNode)b.UserData);
-					node.Position = new CCPoint (b.Position.x, b.Position.y) * Consts.PhysicsScale;
-					node.Rotation = -1 * CCMacros.CCRadiansToDegrees(b.Angle);
-					var p = (Particle)node;
-					if (p != null) {
-						p.UpdateMagneticField (FieldStrength);
-						p.Age += dt;
-					}
+			for (var body = world.BodyList; body != null; body = body.Next) {
+				var particle = (Particle)body.UserData;
+				if (particle == null) {
+					continue;
 				}
+				particle.Position = new CCPoint (body.Position.x, body.Position.y) * Consts.PhysicsScale;
+				particle.Rotation = -1 * CCMacros.CCRadiansToDegrees(body.Angle);
+				particle.UpdateMagneticField (FieldStrength);
+				particle.Age += dt;
 			}
 		}
 

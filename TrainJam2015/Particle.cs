@@ -54,6 +54,8 @@ namespace TrainJam2015
 
 		public float Age { get; set; }
 
+		public b2Body Body { get { return body; } }
+
 		protected override void AddedToScene ()
 		{
 			sprite = new CCSprite ("Particle");
@@ -105,18 +107,6 @@ namespace TrainJam2015
 			world.DestroyBody (body);
 			body.UserData = null;
 			body = null;
-		}
-
-		public void Explode ()
-		{
-			var c = Chamber;
-			var v = body.LinearVelocity;
-			var p = Position;
-
-			Destroy ();
-
-			c.AddParticle (p, v + new b2Vec2 (0, 200), 1, isUnstable: true);
-			c.AddParticle (p, v + new b2Vec2 (0, -200), -1, isUnstable: true);
 		}
 	}
 }

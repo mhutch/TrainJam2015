@@ -46,13 +46,38 @@ namespace TrainJam2015
 				return;
 			}
 
+			if (a.IsUnstable || b.IsUnstable) {
+				Explode (a, b);
+			}
+		}
+
+		void Explode (Particle a, Particle b)
+		{
 			if (a.IsUnstable) {
-				a.Explode ();
+				CreateChildren (a);
 			}
 
 			if (b.IsUnstable) {
-				b.Explode ();
+				CreateChildren (b);
 			}
+
+			if (a.IsUnstable) {
+				a.Destroy ();
+			}
+
+			if (b.IsUnstable) {
+				b.Destroy ();
+			}
+		}
+
+		void CreateChildren (Particle a)
+		{
+			var v = a.Body.LinearVelocity;
+			var vcross = a.Body.LinearVelocity.UnitCross ();
+			vcross.Normalize ();
+			vcross *= 200;
+			a.Chamber.AddParticle (a.Position, v + vcross, 1, isUnstable: true);
+			a.Chamber.AddParticle (a.Position, v - vcross, -1, isUnstable: true);
 		}
 
 		public override void PreSolve (b2Contact contact, Box2D.Collision.b2Manifold oldManifold)
