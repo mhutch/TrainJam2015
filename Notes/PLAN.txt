@@ -35,10 +35,14 @@ Work plan:
 * Collision with unsplittable particles [DONE]
 * Particle mass [DONE]
 * Particle splitting [DONE]
-* Particle spawning
-* Overhaul particle art
 * Animated background
+* Follow cam
 * Cloud tracks
+* Audio
+* Particle spawning
+* Particle culling
+* Particle kinds
+* Overhaul particle art
 * Splash screen
-* Audio?
 * Credits
+* Overhaul audio

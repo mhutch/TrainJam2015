@@ -35,7 +35,7 @@ namespace TrainJam2015
 	{
 		b2World world;
 		CCSize screenSize;
-		Queue<Particle> particlesToAdd = new Queue<Particle> ();
+		readonly Queue<Particle> particlesToAdd = new Queue<Particle> ();
 
 		public CloudChamber (CCSize size) : base (size)
 		{
@@ -59,8 +59,8 @@ namespace TrainJam2015
 
 			var center = screenSize.Center;
 
-			AddParticle (center, new b2Vec2 (20, 0), isUnstable: true);
-			AddParticle (center + new CCPoint (-300, 0), new b2Vec2 (100, 0), 3, 2);
+			AddParticle (center, new b2Vec2 (50, 0), isUnstable: true);
+			AddParticle (center + new CCPoint (-300, 0), new b2Vec2 (200, 0), 3, 2);
 	//		AddParticle (center + new CCPoint (-400, 0), new b2Vec2 (100, 0), -2);
 
 			Schedule (Tick);

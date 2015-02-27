@@ -57,6 +57,7 @@ namespace TrainJam2015
 		protected override void AddedToScene ()
 		{
 			sprite = new CCSprite ("Particle");
+			sprite.Scale = 0.5f;
 			AddChild (sprite);
 
 			var bodyDef = new b2BodyDef {
@@ -67,7 +68,7 @@ namespace TrainJam2015
 
 			var fixtureDef = new b2FixtureDef {
 				shape = new b2CircleShape {
-					Radius = (sprite.ContentSize.Width / Consts.PhysicsScale) * 0.5f * 0.68f
+					Radius = (sprite.ScaledContentSize.Width / Consts.PhysicsScale) * 0.5f * 0.68f
 				},
 				density = 0.0f,
 				friction = 0.0f,
@@ -114,8 +115,8 @@ namespace TrainJam2015
 
 			Destroy ();
 
-			c.AddParticle (p, v + new b2Vec2 (0, 100), 1, isUnstable: true);
-			c.AddParticle (p, v + new b2Vec2 (0, -100), -1, isUnstable: true);
+			c.AddParticle (p, v + new b2Vec2 (0, 200), 1, isUnstable: true);
+			c.AddParticle (p, v + new b2Vec2 (0, -200), -1, isUnstable: true);
 		}
 	}
 }

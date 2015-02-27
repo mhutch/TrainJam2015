@@ -30,7 +30,7 @@ namespace TrainJam2015
 	public static class Consts
 	{
 		//how much bigger the real world is than the physics world
-		public const float PhysicsScale = 10;
+		public const float PhysicsScale = 100;
 
 		//how strong the magnetic field is
 		public const float FieldScale = 10;
@@ -41,4 +41,3 @@ namespace TrainJam2015
 		public const float ExplosionImmunityTime = 1.0f;
 	}
 }
-
