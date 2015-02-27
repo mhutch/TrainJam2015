@@ -23,9 +23,10 @@ Work plan:
 
 * Stub out the solution for Mac and Windows [DONE]
 * Get a window showing [DONE]
-* Get particle displaying in window
-* Static magnetic field
-* Controls for field
+* Get particle displaying in window [DONE]
+* Static magnetic field [DONE]
+* Controls for field [DONE]
+* Display field strength
 * Additional particles
 * Collision with unsplittable particles
 * Particle splitting

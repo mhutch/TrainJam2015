@@ -26,6 +26,7 @@
 
 using CocosSharp;
 using Box2D.Dynamics;
+using Box2D.Common;
 
 namespace TrainJam2015
 {
@@ -35,7 +36,7 @@ namespace TrainJam2015
 		b2Body body;
 		CCSprite sprite;
 
-		public Particle (b2World world, CCPoint position)
+		public Particle (b2World world, CCPoint position, b2Vec2 initialVelocity = default (b2Vec2))
 		{
 			Position = position;
 			this.world = world;
@@ -44,11 +45,13 @@ namespace TrainJam2015
 			AddChild (sprite);
 
 			var bodyDef = new b2BodyDef ();
-			bodyDef.type = b2BodyType.b2_staticBody;
+			bodyDef.type = b2BodyType.b2_dynamicBody;
 			bodyDef.position.x = position.X;
 			bodyDef.position.y = position.Y;
+			bodyDef.linearVelocity = initialVelocity;
 
 			body = world.CreateBody (bodyDef);
+			body.GravityScale = 0;
 			body.UserData = this;
 		}
 	}
