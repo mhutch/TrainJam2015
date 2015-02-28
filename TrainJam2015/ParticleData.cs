@@ -66,7 +66,7 @@ namespace TrainJam2015
 			AP.Children = new[] { CP, DN };
 			CP.Children = new[] { EP, AN };
 			BP.Children = new[] { EP, DP };
-			BN.Children = new[] { BN, DP, BN, AN };
+			AN.Children = new[] { BN, DP, BN, AN };
 			CP.Children = new[] { EP, AN, DN };
 			CN.Children = new[] { EP, BN, AP };
 			DP.Children = new[] { BN, DN, AN, CN, CP };
