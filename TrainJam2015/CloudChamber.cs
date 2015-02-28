@@ -211,7 +211,7 @@ namespace TrainJam2015
 				var vy = CCRandom.GetRandomFloat (minvy, maxvy);
 				var data = ParticleData.GetRandomParticle ();
 
-				AddParticle (data, new CCPoint (x, y), new b2Vec2 (vx, vy));
+				AddParticle (data, new CCPoint (x, y), new b2Vec2 (vx, vy) + keyParticle.Body.LinearVelocity * Consts.PhysicsScale);
 			}
 		}
 
