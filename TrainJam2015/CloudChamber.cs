@@ -109,10 +109,11 @@ namespace TrainJam2015
 
 			//cull children that got too far away
 			// how many screen sizes away a particles gets before it's culled
-			const float cullRange = 0.5f;
+			const float cullRange = 0.4f;
 			var cullMask = ConstructScreenRect (cullRange);
 			for (int i = 0; i < Children.Count; ) {
-				if (cullMask.ContainsPoint (Children [i].Position)) {
+				var pos = Children [i].Position;
+				if (cullMask.ContainsPoint (pos)) {
 					i++;
 				} else {
 					CCLog.Log ("CULL");
@@ -135,7 +136,7 @@ namespace TrainJam2015
 			//replace culled particles with random spawn
 			var replaceCount = Consts.MinParticles - world.BodyCount;
 			if (replaceCount > 0) {
-				SpawnParticlesAroundEdges (replaceCount, ConstructScreenRect (0.1f));
+				SpawnParticlesAroundEdges (replaceCount, ConstructScreenRect (0.01f));
 			}
 		}
 
@@ -170,9 +171,10 @@ namespace TrainJam2015
 		{
 			for (int i = 0; i < count; i++) {
 				CCLog.Log ("SPAWN");
+				int side = CCRandom.GetRandomInt (0, 3);
 				float minx = include.MinX, maxx = include.MaxX, miny = include.MinY, maxy = include.MaxY;
 				float minvx = -200f, maxvx = 200f, minvy = -200f, maxvy = 200f;
-				switch (CCRandom.GetRandomInt (0, 3)) {
+				switch (side) {
 				//LEFT
 				case 0:
 					maxx = include.MinX;

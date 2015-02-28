@@ -99,10 +99,10 @@ namespace TrainJam2015
 
 		public void Destroy ()
 		{
-			RemoveFromParent ();
 			world.DestroyBody (Body);
 			Body.UserData = null;
 			Body = null;
+			RemoveFromParent ();
 		}
 
 		Bubble lastBubble;

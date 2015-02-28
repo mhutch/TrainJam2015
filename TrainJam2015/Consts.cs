@@ -48,7 +48,7 @@ namespace TrainJam2015
 		public const float SpeedSoftCap = 80f;
 		public const float SpeedHardCap = 100f;
 
-		public const int MinParticles = 10;
-		public const int MaxParticles = 40;
+		public const int MinParticles = 15;
+		public const int MaxParticles = 50;
 	}
 }
