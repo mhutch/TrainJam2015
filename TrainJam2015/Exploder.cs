@@ -65,6 +65,16 @@ namespace TrainJam2015
 				CreateChildren (b, a);
 			}
 
+			//TODO: add a little momentum to explosion
+			var explosion = new CCParticleExplosion (a.Position) {
+				Duration = 0.01f,
+				Life = 0.7f,
+				StartRadius = 0,
+				EndRadius = Consts.BaseParticleSize,
+				AutoRemoveOnFinish = true,
+			};
+			a.Parent.AddChild (explosion, -20);
+
 			if (a.IsUnstable) {
 				a.Destroy ();
 			}

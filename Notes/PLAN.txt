@@ -37,6 +37,7 @@ Work plan:
 * Particle splitting [DONE]
 * Particle kinds [DONE]
 * Audio [DONE]
+* Explosion effect [DONE]
 * Animated background
 * Follow cam
 * Cloud tracks
