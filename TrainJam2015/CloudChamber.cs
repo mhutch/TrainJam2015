@@ -63,7 +63,7 @@ namespace TrainJam2015
 			var center = screenSize.Center;
 			keyParticle = AddParticle (ParticleData.BN, center + new CCPoint (-300, 0), new b2Vec2 (200, 0));
 
-			SpawnParticles (10, ConstructScreenRect (0.2f));
+			SpawnParticles (Consts.MinParticles, ConstructScreenRect (0.2f));
 
 			Schedule (Tick);
 		}
@@ -112,7 +112,7 @@ namespace TrainJam2015
 
 			//cull children that got too far away
 			// how many screen sizes away a particles gets before it's culled
-			const float cullRange = 1f;
+			const float cullRange = 0.5f;
 			var cullMask = ConstructScreenRect (cullRange);
 			for (int i = 0; i < Children.Count; ) {
 				if (cullMask.ContainsPoint (Children [i].Position)) {
@@ -131,6 +131,12 @@ namespace TrainJam2015
 			foreach (var child in Children) {
 				child.Update (dt);
 			}
+
+			//replace culled particles with random spawn
+			var replaceCount = Consts.MinParticles - world.BodyCount;
+			if (replaceCount > 0) {
+				SpawnParticles (replaceCount, ConstructScreenRect (0.2f));
+			}
 		}
 
 		CCRect ConstructScreenRect (float expandFactor)
@@ -147,8 +153,7 @@ namespace TrainJam2015
 			);
 		}
 
-		//TODO: min distance from existing particles
-		//exclude expected to be smaller and inside include
+		//TODO: min distance from existing particles?
 		void SpawnParticles (int count, CCRect include)
 		{
 			for (int i = 0; i < count; i++) {

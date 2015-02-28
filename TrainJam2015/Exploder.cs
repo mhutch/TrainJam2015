@@ -46,7 +46,7 @@ namespace TrainJam2015
 			}
 
 			// sanity check to stop world from exploding
-			if (contact.FixtureA.Body.World.BodyCount > 100) {
+			if (contact.FixtureA.Body.World.BodyCount > Consts.MaxParticles) {
 				return;
 			}
 
