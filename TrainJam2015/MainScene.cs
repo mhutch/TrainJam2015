@@ -74,7 +74,10 @@ namespace TrainJam2015
 			lastKeyboardState = evt.KeyboardState;
 
 			if (evt.KeyboardState.IsKeyDown (CCKeys.Escape)) {
-				Director.ReplaceScene (new SplashScene (Window));
+				var scene = new CCScene (Window);
+				var layer = new SplashLayer (Window.WindowSizeInPixels);
+				scene.AddChild (layer);
+				Director.ReplaceScene (scene);
 			}
 		}
 

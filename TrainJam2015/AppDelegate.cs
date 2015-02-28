@@ -54,7 +54,9 @@ namespace TrainJam2015
 			application.ContentRootDirectory = "Content";
 			#endif
 
-			var scene = new SplashScene (mainWindow);
+			var scene = new CCScene (mainWindow);
+			var layer = new SplashLayer (mainWindow.WindowSizeInPixels);
+			scene.AddChild (layer);
 			mainWindow.RunWithScene (scene);
 		}
 	}

@@ -28,10 +28,16 @@ using CocosSharp;
 
 namespace TrainJam2015
 {
-	public class SplashScene : CCScene
+	public class SplashLayer : CCLayer
 	{
-		public SplashScene (CCWindow mainWindow) : base (mainWindow)
+		public SplashLayer (CCSize size) : base (size)
 		{
+		}
+
+		protected override void AddedToScene ()
+		{
+			base.AddedToScene ();
+
 			var screenSize = Window.WindowSizeInPixels;
 			var background = new CCSprite("splash");
 

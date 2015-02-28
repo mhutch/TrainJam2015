@@ -51,7 +51,10 @@ namespace TrainJam2015
 			switch (obj.Keys) {
 			case CCKeys.Space:
 			case CCKeys.Escape:
-				Director.ReplaceScene (new SplashScene (Window));
+				var scene = new CCScene (Window);
+				var layer = new SplashLayer (Window.WindowSizeInPixels);
+				scene.AddChild (layer);
+				Director.ReplaceScene (scene);
 				break;
 			}
 		}
