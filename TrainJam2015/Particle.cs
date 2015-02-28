@@ -119,6 +119,8 @@ namespace TrainJam2015
 			}
 
 			UpdateMagneticField (Chamber.FieldStrength);
+
+			ApplySpeedLimit ();
 		}
 
 		void UpdateMagneticField (float field)
@@ -126,12 +128,21 @@ namespace TrainJam2015
 			if (Body == null) {
 				return;
 			}
+
 			Body.Force = b2Vec2.Zero;
 			var force = field * Body.LinearVelocity.UnitCross () * Charge * Consts.FieldScale;
 
-			force -= Consts.CounterForceScale * field * Body.LinearVelocity * Charge * Consts.FieldScale;
-
 			Body.ApplyForceToCenter (force);
+		}
+
+		void ApplySpeedLimit ()
+		{
+			var speed = Body.LinearVelocity.Length;
+			if (speed > Consts.SpeedHardCap) {
+				Body.LinearVelocity *= Consts.SpeedSoftCap / speed;
+			} else if (speed > Consts.SpeedSoftCap) {
+				Body.LinearVelocity *= 0.9f;
+			}
 		}
 	}
 }

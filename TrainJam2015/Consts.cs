@@ -42,9 +42,11 @@ namespace TrainJam2015
 		public const float ExplosionImmunityTime = 1.0f;
 
 		//size in pixels of a "normal" particle
-		public const float BaseParticleSize = 32f;
+		public const float BaseParticleSize = 48f;
 
-		//can (unphysically) add counter-force to prevent velocity building up too fast
-		public const float CounterForceScale = 0f;
+		//caps to prevent velocity getting too high too fast
+		public static float SpeedSoftCap = 80f;
+		public static float SpeedHardCap = 100f;
+
 	}
 }
