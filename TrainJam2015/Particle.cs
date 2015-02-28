@@ -112,35 +112,5 @@ namespace TrainJam2015
 			Body = null;
 		}
 	}
-
-	class ParticleData
-	{
-		public ParticleData (float charge, float mass, string image)
-		{
-			if (image == null)
-				throw new ArgumentNullException ("image");
-			if (mass <= 0)
-				throw new ArgumentException ("Massless particles not allowed");
-
-			Charge = charge;
-			Mass = mass;
-			Image = image;
-		}
-
-		public float Charge { get; private set; }
-		public float Mass { get; private set; }
-		public string Image {get; private set; }
-		public ParticleData[] Children { get; private set; }
-
-		public bool IsUnstable { get { return Children != null; } }
-
-		public static readonly ParticleData A = new ParticleData (1, 1, "particle-red");
-		public static readonly ParticleData B = new ParticleData (-1, 1, "particle-blue");
-
-		static ParticleData ()
-		{
-			A.Children = new[] { A, B };
-		}
-	}
 }
 

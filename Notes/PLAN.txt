@@ -36,13 +36,16 @@ Work plan:
 * Particle mass [DONE]
 * Particle splitting [DONE]
 * Particle kinds [DONE]
+* Audio [DONE]
 * Animated background
 * Follow cam
 * Cloud tracks
-* Audio
 * Particle spawning
 * Particle culling
-* Overhaul particle art
+* Particle polish
+* Background polish
+* Tracks polish
+* Audio polish
+* Explosion polish
 * Splash screen
 * Credits
-* Overhaul audio

@@ -31,7 +31,6 @@ using Box2D.Collision;
 using CocosSharp;
 using Box2D.Common;
 using System.Linq;
-using Microsoft.Xna.Framework;
 
 namespace TrainJam2015
 {
@@ -103,6 +102,7 @@ namespace TrainJam2015
 
 				a.Chamber.AddParticle (c, a.Position, momentumPerUnitChildMass * c.Mass + dirVector * childSpeed);
 				direction += rotationPerChild;
+				c.Sound.Play ();
 			}
 		}
 
