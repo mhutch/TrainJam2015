@@ -66,5 +66,34 @@ namespace TrainJam2015
 			AP.Children = new[] { CP, DN };
 			CP.Children = new[] { EP, AN };
 		}
+
+		public static ParticleData GetRandomParticle ()
+		{
+			switch (CCRandom.GetRandomInt (0, 9)) {
+			case 0:
+				return AP;
+			case 1:
+				return AN;
+			case 2:
+				return BP;
+			case 3:
+				return BN;
+			case 4:
+				return CP;
+			case 5:
+				return CN;
+			case 6:
+				return DP;
+			case 7:
+				return DN;
+			case 8:
+				return EP;
+			case 9:
+				return EN;
+			default:
+				throw new InvalidOperationException ();
+			}
+
+		}
 	}
 }
