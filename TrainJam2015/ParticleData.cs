@@ -50,12 +50,17 @@ namespace TrainJam2015
 
 		public bool IsUnstable { get { return Children != null; } }
 
-		public static readonly ParticleData A = new ParticleData (1, 1, CCColor3B.Red, Sound.Tone8);
+		public static readonly ParticleData A = new ParticleData ( 1, 1, CCColor3B.Red, Sound.Tone8);
 		public static readonly ParticleData B = new ParticleData (-1, 1, new CCColor3B (80, 120, 255), Sound.Tone4);
+		public static readonly ParticleData C = new ParticleData (-2, 1, new CCColor3B (255, 80, 120), Sound.Tone5);
+		public static readonly ParticleData D = new ParticleData ( 2, 1, new CCColor3B (255, 120, 80), Sound.Tone8);
+		public static readonly ParticleData E = new ParticleData (-3, 1, new CCColor3B (80, 255, 120), Sound.Tone4);
+		public static readonly ParticleData F = new ParticleData ( 3, 1, new CCColor3B (120, 80, 255), Sound.Tone4);
 
 		static ParticleData ()
 		{
-			A.Children = new[] { A, B };
+			A.Children = new[] { C, D };
+			C.Children = new[] { E, F };
 		}
 	}
 }
