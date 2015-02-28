@@ -73,11 +73,18 @@ namespace TrainJam2015
 		{
 			lastKeyboardState = evt.KeyboardState;
 
-			if (evt.KeyboardState.IsKeyDown (CCKeys.Escape)) {
-				var scene = new CCScene (Window);
-				var layer = new SplashLayer (Window.WindowSizeInPixels);
-				scene.AddChild (layer);
-				Director.ReplaceScene (scene);
+			if (evt.KeyboardEventType == CCKeyboardEventType.KEYBOARD_PRESS) {
+				switch (evt.Keys) {
+				case CCKeys.Escape:
+					var scene = new CCScene (Window);
+					var layer = new SplashLayer (Window.WindowSizeInPixels);
+					scene.AddChild (layer);
+					Director.ReplaceScene (scene);
+					break;
+				case CCKeys.Space:
+					Director.ReplaceScene (new MainScene (Window));
+					break;
+				}
 			}
 		}
 
