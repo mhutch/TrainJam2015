@@ -58,7 +58,8 @@ namespace TrainJam2015
 
 		protected override void AddedToScene ()
 		{
-			Texture = CCTextureCache.SharedTextureCache.AddImage ("particle");
+			var imageName = Data.Charge < 0? "particle-negative" : "particle";
+			Texture = CCTextureCache.SharedTextureCache.AddImage (imageName);
 			ContentSize = Texture.ContentSizeInPixels;
 
 			var scale = Consts.BaseParticleSize / ContentSize.Width;

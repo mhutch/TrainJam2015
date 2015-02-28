@@ -60,8 +60,8 @@ namespace TrainJam2015
 
 			var center = screenSize.Center;
 
-			AddParticle (ParticleData.A, center, new b2Vec2 (50, 0));
-			keyParticle = AddParticle (ParticleData.B, center + new CCPoint (-300, 0), new b2Vec2 (200, 0));
+			AddParticle (ParticleData.AP, center, new b2Vec2 (50, 0));
+			keyParticle = AddParticle (ParticleData.BN, center + new CCPoint (-300, 0), new b2Vec2 (200, 0));
 
 			Schedule (Tick);
 		}
