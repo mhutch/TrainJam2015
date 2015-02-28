@@ -68,10 +68,11 @@ namespace TrainJam2015
 
 	public enum Sound
 	{
-		Tone1,
-		Tone4,
-		Tone5,
-		Tone8
+		a_sharp,
+		b_natural,
+		c_sharp,
+		d_sharp,
+		f_sharp
 	}
 }
 

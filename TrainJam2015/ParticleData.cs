@@ -50,16 +50,16 @@ namespace TrainJam2015
 
 		public bool IsUnstable { get { return Children != null; } }
 
-		public static readonly ParticleData AP = new ParticleData ( 1, 1, new CCColor3B (255, 080, 057), Sound.Tone8);
-		public static readonly ParticleData AN = new ParticleData (-1, 1, new CCColor3B (255, 080, 057), Sound.Tone8);
-		public static readonly ParticleData BP = new ParticleData ( 2, 1, new CCColor3B (144, 085, 232), Sound.Tone4);
-		public static readonly ParticleData BN = new ParticleData (-2, 1, new CCColor3B (144, 085, 232), Sound.Tone4);
-		public static readonly ParticleData CP = new ParticleData ( 3, 1, new CCColor3B (022, 236, 255), Sound.Tone5);
-		public static readonly ParticleData CN = new ParticleData (-3, 1, new CCColor3B (022, 236, 255), Sound.Tone5);
-		public static readonly ParticleData DP = new ParticleData ( 4, 1, new CCColor3B (153, 232, 102), Sound.Tone8);
-		public static readonly ParticleData DN = new ParticleData (-4, 1, new CCColor3B (153, 232, 102), Sound.Tone8);
-		public static readonly ParticleData EP = new ParticleData ( 1, 2, new CCColor3B (255, 200, 087), Sound.Tone4);
-		public static readonly ParticleData EN = new ParticleData (-1, 2, new CCColor3B (255, 200, 087), Sound.Tone4);
+		public static readonly ParticleData AP = new ParticleData ( 1, 1, new CCColor3B (255, 080, 057), Sound.a_sharp);
+		public static readonly ParticleData AN = new ParticleData (-1, 1, new CCColor3B (255, 080, 057), Sound.a_sharp);
+		public static readonly ParticleData BP = new ParticleData ( 2, 1, new CCColor3B (144, 085, 232), Sound.b_natural);
+		public static readonly ParticleData BN = new ParticleData (-2, 1, new CCColor3B (144, 085, 232), Sound.b_natural);
+		public static readonly ParticleData CP = new ParticleData ( 3, 1, new CCColor3B (022, 236, 255), Sound.c_sharp);
+		public static readonly ParticleData CN = new ParticleData (-3, 1, new CCColor3B (022, 236, 255), Sound.c_sharp);
+		public static readonly ParticleData DP = new ParticleData ( 4, 1, new CCColor3B (153, 232, 102), Sound.d_sharp);
+		public static readonly ParticleData DN = new ParticleData (-4, 1, new CCColor3B (153, 232, 102), Sound.d_sharp);
+		public static readonly ParticleData EP = new ParticleData ( 1, 2, new CCColor3B (255, 200, 087), Sound.f_sharp);
+		public static readonly ParticleData EN = new ParticleData (-1, 2, new CCColor3B (255, 200, 087), Sound.f_sharp);
 
 		static ParticleData ()
 		{

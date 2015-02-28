@@ -46,6 +46,6 @@ Work plan:
 * Music [DONE]
 * Explosion polish [DONE]
 * Particle spawning [DONE]
-* Audio polish
+* Audio polish [DONE]
 * Splash screen
 * Credits

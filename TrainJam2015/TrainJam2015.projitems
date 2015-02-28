@@ -26,13 +26,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="$(MSBuildThisFileDirectory)Content\field-indicator.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Audio\tone1.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Audio\tone4.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Audio\tone5.mp3" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Audio\tone8.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Content\trail.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\particle.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\particle-negative.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Audio\chip4-2.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Audio\a_sharp.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Audio\b_natural.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Audio\c_sharp.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Audio\d_sharp.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Audio\f_sharp.mp3" />
   </ItemGroup>
 </Project>
