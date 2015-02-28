@@ -26,6 +26,7 @@
     <CodeSigningKey>Mac Developer</CodeSigningKey>
     <EnableCodeSigning>false</EnableCodeSigning>
     <CreatePackage>false</CreatePackage>
+    <PackageSigningKey>Developer ID Installer</PackageSigningKey>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <Optimize>true</Optimize>
@@ -37,11 +38,12 @@
     <UseRefCounting>false</UseRefCounting>
     <UseSGen>false</UseSGen>
     <IncludeMonoRuntime>true</IncludeMonoRuntime>
-    <CreatePackage>true</CreatePackage>
+    <CreatePackage>false</CreatePackage>
     <CodeSigningKey>Developer ID Application</CodeSigningKey>
-    <EnableCodeSigning>true</EnableCodeSigning>
+    <EnableCodeSigning>false</EnableCodeSigning>
     <EnablePackageSigning>false</EnablePackageSigning>
     <DefineConstants>MAC</DefineConstants>
+    <PackageSigningKey>Developer ID Installer</PackageSigningKey>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
