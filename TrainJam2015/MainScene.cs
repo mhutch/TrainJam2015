@@ -74,7 +74,7 @@ namespace TrainJam2015
 			lastKeyboardState = evt.KeyboardState;
 
 			if (evt.KeyboardState.IsKeyDown (CCKeys.Escape)) {
-				AppDelegate.Application.ExitGame ();
+				Director.ReplaceScene (new SplashScene (Window));
 			}
 		}
 

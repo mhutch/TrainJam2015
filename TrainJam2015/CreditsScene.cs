@@ -28,15 +28,17 @@ using CocosSharp;
 
 namespace TrainJam2015
 {
-	public class SplashScene : CCScene
+	public class CreditsScene : CCScene
 	{
-		public SplashScene (CCWindow mainWindow) : base (mainWindow)
+		public CreditsScene (CCWindow mainWindow) : base (mainWindow)
 		{
 			var screenSize = Window.WindowSizeInPixels;
-			var background = new CCSprite("splash");
+			var background = new CCSprite("credits");
 
 			background.Scale = 0.8f * screenSize.Height / background.ContentSize.Height;
 			background.Position = new CCPoint(screenSize.Width / 2, screenSize.Height / 2);
+			AddChild(background);
+
 			AddChild(background);
 
 			AddEventListener (new CCEventListenerKeyboard {
@@ -48,13 +50,8 @@ namespace TrainJam2015
 		{
 			switch (obj.Keys) {
 			case CCKeys.Space:
-				Director.ReplaceScene (new MainScene (Window));
-				break;
 			case CCKeys.Escape:
-				AppDelegate.Application.ExitGame ();
-				break;
-			case CCKeys.C:
-				Director.ReplaceScene (new CreditsScene (Window));
+				Director.ReplaceScene (new SplashScene (Window));
 				break;
 			}
 		}

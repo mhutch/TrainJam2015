@@ -19,6 +19,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Sounds.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ParticleData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Bubble.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SplashScene.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CreditsScene.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Content\" />
@@ -35,5 +37,7 @@
     <Content Include="$(MSBuildThisFileDirectory)Content\Audio\c_sharp.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Audio\d_sharp.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Audio\f_sharp.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\splash.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\credits.png" />
   </ItemGroup>
 </Project>
