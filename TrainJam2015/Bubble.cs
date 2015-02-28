@@ -42,12 +42,16 @@ namespace TrainJam2015
 			position.Y += CCRandom.GetRandomFloat (-positionVariance, positionVariance);
 			Position = position;
 			Scale = 0f;
+			BubblesCount++;
 		}
 
 		static CCTexture2D GetBubbleTexture ()
 		{
 			return bubble ?? (bubble = new CCTexture2D ("trail"));
 		}
+
+		public const float BubblesMax = 50;
+		public static float BubblesCount = 0;
 
 		float age;
 
@@ -56,6 +60,7 @@ namespace TrainJam2015
 			age += dt;
 			if (age > lifetime) {
 				Parent.RemoveChild (this);
+				BubblesCount--;
 				return;
 			}
 

@@ -114,8 +114,10 @@ namespace TrainJam2015
 			Age += dt;
 
 			if (lastBubble == null || (lastBubble.Position - Position).Length > bubbleSpacing) {
-				lastBubble = new Bubble (Position);
-				Parent.AddChild (lastBubble, -10);
+				if (Chamber.KeyParticle == this || Bubble.BubblesCount < Bubble.BubblesMax) {
+					lastBubble = new Bubble (Position);
+					Parent.AddChild (lastBubble, -10);
+				}
 			}
 
 			UpdateMagneticField (Chamber.FieldStrength);

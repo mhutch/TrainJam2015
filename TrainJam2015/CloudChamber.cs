@@ -43,6 +43,8 @@ namespace TrainJam2015
 			screenSize = size;
 		}
 
+		public Particle KeyParticle { get { return keyParticle; } }
+
 		protected override void AddedToScene ()
 		{
 			base.AddedToScene ();
