@@ -96,6 +96,9 @@ namespace TrainJam2015
 			}
 			Body.Force = b2Vec2.Zero;
 			var force = field * Body.LinearVelocity.UnitCross () * Charge * Consts.FieldScale;
+
+			force -= Consts.CounterForceScale * field * Body.LinearVelocity * Charge * Consts.FieldScale;
+
 			Body.ApplyForceToCenter (force);
 		}
 

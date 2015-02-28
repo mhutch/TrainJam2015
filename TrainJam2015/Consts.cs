@@ -33,13 +33,18 @@ namespace TrainJam2015
 		public const float PhysicsScale = 100;
 
 		//how strong the magnetic field is
-		public const float FieldScale = 10;
+		public const float FieldScale = 1;
 
 		//what proportion of range field can change per second
 		public const float FieldChangeRate = 0.5f;
 
+		//how long after creation particles are immune to collisions and exploding
 		public const float ExplosionImmunityTime = 1.0f;
 
+		//size in pixels of a "normal" particle
 		public const float BaseParticleSize = 32f;
+
+		//can (unphysically) add counter-force to prevent velocity building up too fast
+		public const float CounterForceScale = 0f;
 	}
 }
