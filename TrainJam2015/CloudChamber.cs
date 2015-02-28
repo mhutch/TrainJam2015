@@ -58,11 +58,7 @@ namespace TrainJam2015
 			world.SetContactListener (new Exploder ());
 			world.SetContactFilter (new ContactFilter ());
 
-			//TEST PARTICLES
-			//for some reason starting faster than 100 physics units per second breaks stuff
-
-			var center = screenSize.Center;
-			keyParticle = AddParticle (ParticleData.BN, center + new CCPoint (-300, 0), new b2Vec2 (200, 0));
+			keyParticle = AddParticle (ParticleData.BN, screenSize.Center + new CCPoint (-300, 0), new b2Vec2 (200, 0));
 
 			SpawnParticles (Consts.MinParticles, ConstructScreenRect (0.2f));
 
@@ -142,7 +138,7 @@ namespace TrainJam2015
 			}
 		}
 
-		CCRect ConstructScreenRect (float expandFactor)
+		public CCRect ConstructScreenRect (float expandFactor)
 		{
 			var centerX = keyParticle.Position.X;
 			var centerY = keyParticle.Position.Y;

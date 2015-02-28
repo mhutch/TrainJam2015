@@ -37,12 +37,7 @@ namespace TrainJam2015
 
 		public MainScene (CCWindow mainWindow) : base (mainWindow)
 		{
-			var resolution = new CCSize (
-				mainWindow.WindowSizeInPixels.Width,
-				mainWindow.WindowSizeInPixels.Height
-			);
-
-			cloudChamber = new CloudChamber (resolution);
+			cloudChamber = new CloudChamber (mainWindow.WindowSizeInPixels);
 			AddChild (cloudChamber);
 
 			AddEventListener (new CCEventListenerKeyboard {

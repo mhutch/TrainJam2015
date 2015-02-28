@@ -50,9 +50,17 @@ namespace TrainJam2015
 				return;
 			}
 
-			if (a.IsUnstable || b.IsUnstable) {
-				Explode (a, b);
+			if (!a.IsUnstable && !b.IsUnstable) {
+				return;
 			}
+
+			//don't explode offscreen
+			var screen = a.Chamber.ConstructScreenRect (0f);
+			if (!screen.ContainsPoint (GetPosition (a))) {
+				return;
+			}
+
+			Explode (a, b);
 		}
 
 		void Explode (Particle a, Particle b)
