@@ -41,12 +41,11 @@ Work plan:
 * Follow cam [DONE]
 * Cloud tracks [DONE]
 * Particle culling [DONE]
+* Particle polish [DONE]
+* Tracks polish [DONE]
+* Music [DONE]
+* Explosion polish [DONE]
 * Particle spawning
-* Animated background
-* Particle polish
-* Background polish
-* Tracks polish
 * Audio polish
-* Explosion polish
 * Splash screen
 * Credits
