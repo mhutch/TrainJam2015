@@ -25,34 +25,33 @@
 // THE SOFTWARE.
 
 using System;
+using CocosSharp;
 
 namespace TrainJam2015
 {
 	class ParticleData
 	{
-		public ParticleData (float charge, float mass, string image, Sound sound)
+		public ParticleData (float charge, float mass, CCColor3B color, Sound sound)
 		{
-			if (image == null)
-				throw new ArgumentNullException ("image");
 			if (mass <= 0)
 				throw new ArgumentException ("Massless particles not allowed");
 
 			Charge = charge;
 			Mass = mass;
-			Image = image;
 			Sound = sound;
+			Color = color;
 		}
 
 		public float Charge { get; private set; }
 		public float Mass { get; private set; }
-		public string Image { get; private set; }
+		public CCColor3B Color { get; private set; }
 		public Sound Sound { get; private set; }
 		public ParticleData[] Children { get; private set; }
 
 		public bool IsUnstable { get { return Children != null; } }
 
-		public static readonly ParticleData A = new ParticleData (1, 1, "particle-red", Sound.Tone8);
-		public static readonly ParticleData B = new ParticleData (-1, 1, "particle-blue", Sound.Tone4);
+		public static readonly ParticleData A = new ParticleData (1, 1, CCColor3B.Red, Sound.Tone8);
+		public static readonly ParticleData B = new ParticleData (-1, 1, new CCColor3B (80, 120, 255), Sound.Tone4);
 
 		static ParticleData ()
 		{

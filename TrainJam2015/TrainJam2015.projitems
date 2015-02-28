@@ -26,12 +26,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="$(MSBuildThisFileDirectory)Content\field-indicator.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\particle-red.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\particle-blue.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Audio\tone1.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Audio\tone4.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Audio\tone5.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Audio\tone8.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Content\trail.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\particle.png" />
   </ItemGroup>
 </Project>

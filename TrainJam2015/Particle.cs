@@ -32,9 +32,8 @@ using System;
 
 namespace TrainJam2015
 {
-	class Particle : CCNode
+	class Particle : CCSprite
 	{
-		CCSprite sprite;
 		b2Vec2 initialVelocity;
 		readonly b2World world;
 
@@ -44,6 +43,7 @@ namespace TrainJam2015
 			this.world = world;
 			this.initialVelocity = initialVelocity;
 			Position = position;
+			AnchorPoint = CCPoint.AnchorMiddle;
 		}
 
 		public ParticleData Data { get; private set; }
@@ -58,12 +58,15 @@ namespace TrainJam2015
 
 		protected override void AddedToScene ()
 		{
-			sprite = new CCSprite (Data.Image);
-			var scale = Consts.BaseParticleSize / sprite.ContentSize.Width;
+			Texture = CCTextureCache.SharedTextureCache.AddImage ("particle");
+			ContentSize = Texture.ContentSizeInPixels;
 
-			sprite.Scale = scale;
+			var scale = Consts.BaseParticleSize / ContentSize.Width;
 
-			AddChild (sprite);
+			Scale = scale;
+
+			DisplayedColor = Data.Color;
+			UpdateColor ();
 
 			var bodyDef = new b2BodyDef {
 				type = b2BodyType.b2_dynamicBody,
@@ -73,7 +76,7 @@ namespace TrainJam2015
 
 			var fixtureDef = new b2FixtureDef {
 				shape = new b2CircleShape {
-					Radius = (sprite.ScaledContentSize.Width / Consts.PhysicsScale) * 0.5f * 0.68f
+					Radius = (ScaledContentSize.Width / Consts.PhysicsScale) * 0.5f * 0.68f
 				},
 				density = 0.0f,
 				friction = 0.0f,
@@ -96,7 +99,6 @@ namespace TrainJam2015
 		public void Destroy ()
 		{
 			RemoveFromParent ();
-			sprite = null;
 			world.DestroyBody (Body);
 			Body.UserData = null;
 			Body = null;
