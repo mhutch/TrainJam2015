@@ -124,7 +124,13 @@ namespace TrainJam2015
 				if (cullMask.ContainsPoint (Children [i].Position)) {
 					i++;
 				} else {
-					RemoveChild (Children [i]);
+					var child = Children [i];
+					var p = child as Particle;
+					if (p != null) {
+						p.Destroy ();
+					} else {
+						RemoveChild (child);
+					}
 				}
 			}
 
