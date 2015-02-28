@@ -28,6 +28,7 @@ using CocosSharp;
 using Box2D.Dynamics;
 using Box2D.Common;
 using System.Collections.Generic;
+using System;
 
 namespace TrainJam2015
 {
@@ -119,6 +120,8 @@ namespace TrainJam2015
 					i++;
 				} else {
 					var child = Children [i];
+					if (child == keyParticle)
+						throw new Exception ();
 					var p = child as Particle;
 					if (p != null) {
 						p.Destroy ();
@@ -135,7 +138,7 @@ namespace TrainJam2015
 			//replace culled particles with random spawn
 			var replaceCount = Consts.MinParticles - world.BodyCount;
 			if (replaceCount > 0) {
-				SpawnParticles (replaceCount, ConstructScreenRect (0.2f));
+				SpawnParticlesAroundEdges (replaceCount, ConstructScreenRect (0.1f));
 			}
 		}
 
@@ -162,6 +165,54 @@ namespace TrainJam2015
 				var vx = CCRandom.GetRandomFloat (-200f, 200f);
 				var vy = CCRandom.GetRandomFloat (-200f, -200f);
 				var data = ParticleData.GetRandomParticle ();
+				AddParticle (data, new CCPoint (x, y), new b2Vec2 (vx, vy));
+			}
+		}
+
+		void SpawnParticlesAroundEdges (int count, CCRect include)
+		{
+			for (int i = 0; i < count; i++) {
+				float minx = include.MinX, maxx = include.MaxX, miny = include.MinY, maxy = include.MaxY;
+				float minvx = -200f, maxvx = 200f, minvy = -200f, maxvy = 200f;
+				switch (CCRandom.GetRandomInt (0, 3)) {
+				//LEFT
+				case 0:
+					maxx = include.MinX;
+					minvx = 0f;
+					minvy *= 0.2f;
+					maxvy *= 0.2f;
+					break;
+				//RIGHT
+				case 1:
+					minx = include.MaxX;
+					maxvx = 0f;
+					minvy *= 0.2f;
+					maxvy *= 0.2f;
+					break;
+				//TOP
+				case 2:
+					miny = include.MaxX;
+					maxvy = 0f;
+					minvx *= 0.2f;
+					maxvx *= 0.2f;
+					break;
+				//BOTTOM
+				case 3:
+					maxy = include.MinY;
+					minvy = 0f;
+					minvx *= 0.2f;
+					maxvx *= 0.2f;
+					break;
+				default:
+					throw new InvalidOperationException ();
+				}
+
+				var x = CCRandom.GetRandomFloat (minx, maxx);
+				var y = CCRandom.GetRandomFloat (miny, maxy);
+				var vx = CCRandom.GetRandomFloat (minvx, maxvx);
+				var vy = CCRandom.GetRandomFloat (minvy, maxvy);
+				var data = ParticleData.GetRandomParticle ();
+
 				AddParticle (data, new CCPoint (x, y), new b2Vec2 (vx, vy));
 			}
 		}
