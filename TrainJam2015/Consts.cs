@@ -45,8 +45,10 @@ namespace TrainJam2015
 		public const float BaseParticleSize = 48f;
 
 		//caps to prevent velocity getting too high too fast
-		public static float SpeedSoftCap = 80f;
-		public static float SpeedHardCap = 100f;
+		public const float SpeedSoftCap = 80f;
+		public const float SpeedHardCap = 100f;
 
+		public const int MinParticles = 20;
+		public const int MaxParticles = 40;
 	}
 }

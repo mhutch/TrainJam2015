@@ -61,9 +61,9 @@ namespace TrainJam2015
 			//for some reason starting faster than 100 physics units per second breaks stuff
 
 			var center = screenSize.Center;
-
-			AddParticle (ParticleData.AP, center, new b2Vec2 (50, 0));
 			keyParticle = AddParticle (ParticleData.BN, center + new CCPoint (-300, 0), new b2Vec2 (200, 0));
+
+			SpawnParticles (10, ConstructScreenRect (0.2f));
 
 			Schedule (Tick);
 		}
@@ -112,14 +112,8 @@ namespace TrainJam2015
 
 			//cull children that got too far away
 			// how many screen sizes away a particles gets before it's culled
-			const float cullRange = 2.0f;
-			var cullWidth = screenSize.Width * (1f + cullRange * 2f);
-			var cullHeight = screenSize.Height * (1f + cullRange * 2f);
-			var cullMask = new CCRect (
-				centerX - cullWidth /2f, centerY - cullHeight /2f,
-				cullWidth,
-				cullHeight
-			);
+			const float cullRange = 1f;
+			var cullMask = ConstructScreenRect (cullRange);
 			for (int i = 0; i < Children.Count; ) {
 				if (cullMask.ContainsPoint (Children [i].Position)) {
 					i++;
@@ -137,10 +131,33 @@ namespace TrainJam2015
 			foreach (var child in Children) {
 				child.Update (dt);
 			}
+		}
 
-			//spawn
+		CCRect ConstructScreenRect (float expandFactor)
+		{
+			var centerX = keyParticle.Position.X;
+			var centerY = keyParticle.Position.Y;
 
+			var width = screenSize.Width * (expandFactor * 2 + 1);
+			var height = screenSize.Height * (expandFactor * 2 + 1);
 
+			return new CCRect (
+				centerX - width /2f, centerY - height /2f,
+				width, height
+			);
+		}
+
+		//TODO: min distance from existing particles
+		//exclude expected to be smaller and inside include
+		void SpawnParticles (int count, CCRect include)
+		{
+			for (int i = 0; i < count; i++) {
+				var x = CCRandom.GetRandomFloat (include.MinX, include.MaxX);
+				var y = CCRandom.GetRandomFloat (include.MinY, include.MaxY);
+				var vx = CCRandom.GetRandomFloat (-200f, 200f);
+				var vy = CCRandom.GetRandomFloat (-200f, -200f);
+				AddParticle (ParticleData.AN, new CCPoint (x, y), new b2Vec2 (vx, vy));
+			}
 		}
 
 		public float FieldStrength { get; set; }
