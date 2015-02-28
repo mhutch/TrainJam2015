@@ -60,7 +60,7 @@ namespace TrainJam2015
 
 			keyParticle = AddParticle (ParticleData.BN, screenSize.Center + new CCPoint (-300, 0), new b2Vec2 (200, 0));
 
-			SpawnParticles (Consts.MinParticles, ConstructScreenRect (0.2f));
+			SpawnParticles (Consts.MinParticles / 2, ConstructScreenRect (0f));
 
 			Schedule (Tick);
 		}
