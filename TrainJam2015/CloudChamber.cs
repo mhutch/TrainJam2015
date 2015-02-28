@@ -115,6 +115,7 @@ namespace TrainJam2015
 				if (cullMask.ContainsPoint (Children [i].Position)) {
 					i++;
 				} else {
+					CCLog.Log ("CULL");
 					var child = Children [i];
 					if (child == keyParticle)
 						throw new Exception ();
@@ -168,6 +169,7 @@ namespace TrainJam2015
 		void SpawnParticlesAroundEdges (int count, CCRect include)
 		{
 			for (int i = 0; i < count; i++) {
+				CCLog.Log ("SPAWN");
 				float minx = include.MinX, maxx = include.MaxX, miny = include.MinY, maxy = include.MaxY;
 				float minvx = -200f, maxvx = 200f, minvy = -200f, maxvy = 200f;
 				switch (CCRandom.GetRandomInt (0, 3)) {
