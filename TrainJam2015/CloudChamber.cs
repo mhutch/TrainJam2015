@@ -109,10 +109,14 @@ namespace TrainJam2015
 			);
 
 			//cull children that got too far away
+			// how many screen sizes away a particles gets before it's culled
+			const float cullRange = 2.0f;
+			var cullWidth = screenSize.Width * (1f + cullRange * 2f);
+			var cullHeight = screenSize.Height * (1f + cullRange * 2f);
 			var cullMask = new CCRect (
-				centerX -screenSize.Width, centerY -screenSize.Height,
-				screenSize.Width * 2,
-				screenSize.Height * 2
+				centerX - cullWidth /2f, centerY - cullHeight /2f,
+				cullWidth,
+				cullHeight
 			);
 			for (int i = 0; i < Children.Count; ) {
 				if (cullMask.ContainsPoint (Children [i].Position)) {
