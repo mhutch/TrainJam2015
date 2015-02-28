@@ -111,6 +111,20 @@ namespace TrainJam2015
 				}
 			}
 
+			//cull children that got too far away
+			CCRect cullMask = new CCRect (
+				-screenSize.Width, -screenSize.Height,
+				screenSize.Width * 3,
+				screenSize.Height * 3
+			);
+			for (int i = 0; i < Children.Count; ) {
+				if (cullMask.ContainsPoint (Children [i].Position)) {
+					i++;
+				} else {
+					RemoveChild (Children [i]);
+				}
+			}
+
 			foreach (var child in Children) {
 				child.Update (dt);
 			}

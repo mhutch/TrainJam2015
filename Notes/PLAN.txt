@@ -40,8 +40,8 @@ Work plan:
 * Explosion effect [DONE]
 * Follow cam [DONE]
 * Cloud tracks [DONE]
+* Particle culling [DONE]
 * Particle spawning
-* Particle culling
 * Animated background
 * Particle polish
 * Background polish
