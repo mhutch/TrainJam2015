@@ -66,7 +66,7 @@ namespace TrainJam2015
 			}
 
 			//TODO: add a little momentum to explosion
-			var explosion = new CCParticleExplosion (a.Position) {
+			var explosion = new CCParticleExplosion (GetPosition (a)) {
 				Duration = 0.01f,
 				Life = 0.7f,
 				StartRadius = 0,
@@ -107,17 +107,25 @@ namespace TrainJam2015
 			var combinedChildMass = children.Sum (c => c.Mass);
 			var momentumPerUnitChildMass = momentum / combinedChildMass;
 
+			//use physics world location, as the scene graph has not yet been updated
+			var pos = GetPosition (a);
+
 			foreach (var c in children) {
 				var dirVector = new b2Vec2 ((float)Math.Cos (direction), (float)Math.Sin (direction));
 				dirVector.Normalize ();
 
 				//TODO: consistent energy and mass conservation for children
 				const float childSpeed = 200f;
-
-				a.Chamber.AddParticle (c, a.Position, momentumPerUnitChildMass * c.Mass + dirVector * childSpeed);
+				a.Chamber.AddParticle (c, pos, momentumPerUnitChildMass * c.Mass + dirVector * childSpeed);
 				direction += rotationPerChild;
 				c.Sound.Play ();
 			}
+		}
+
+		static CCPoint GetPosition (Particle a)
+		{
+			var pos = a.Body.Position * Consts.PhysicsScale;
+			return new CCPoint (pos.x, pos.y);
 		}
 
 		public override void PreSolve (b2Contact contact, b2Manifold oldManifold)
