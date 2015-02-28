@@ -57,6 +57,18 @@ namespace TrainJam2015
 			Schedule (Tick);
 		}
 
+		public override void OnEnter ()
+		{
+			base.OnEnter ();
+			SoundPlayer.PlayMusic ();
+		}
+
+		public override void OnExit ()
+		{
+			base.OnExit ();
+			SoundPlayer.StopMusic ();
+		}
+
 		void Tick (float dt)
 		{
 			UpdateField (dt);

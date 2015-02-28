@@ -33,5 +33,6 @@
     <Content Include="$(MSBuildThisFileDirectory)Content\trail.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\particle.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\particle-negative.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Audio\chip4-2.mp3" />
   </ItemGroup>
 </Project>

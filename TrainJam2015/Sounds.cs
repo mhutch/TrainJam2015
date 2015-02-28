@@ -30,11 +30,14 @@ namespace TrainJam2015
 {
 	public static class SoundPlayer
 	{
+		const string musicName = "chip4-2";
+
 		public static void PreloadSounds()
 		{
 			foreach (var name in Enum.GetNames (typeof (Sound))) {
 				CCSimpleAudioEngine.SharedEngine.PreloadEffect (GetPath (name));
 			}
+			CCSimpleAudioEngine.SharedEngine.PreloadBackgroundMusic (musicName);
 		}
 
 		static string GetPath (string name)
@@ -50,6 +53,16 @@ namespace TrainJam2015
 		public static void Play (this Sound sound)
 		{
 			CCSimpleAudioEngine.SharedEngine.PlayEffect (GetPath (sound.ToString().ToLower()));
+		}
+
+		public static void PlayMusic ()
+		{
+			CCSimpleAudioEngine.SharedEngine.PlayBackgroundMusic (GetPath (musicName), true);
+		}
+
+		public static void StopMusic ()
+		{
+			CCSimpleAudioEngine.SharedEngine.StopBackgroundMusic ();
 		}
 	}
 
