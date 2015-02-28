@@ -41,6 +41,10 @@ namespace TrainJam2015
 
 		public override void ApplicationDidFinishLaunching (CCApplication application, CCWindow mainWindow)
 		{
+			#if DEBUG
+			mainWindow.DisplayStats = true;
+			#endif
+
 			Application = application;
 
 			SoundPlayer.PreloadSounds ();
