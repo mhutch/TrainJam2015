@@ -89,19 +89,6 @@ namespace TrainJam2015
 			Body.SetMassData (new b2MassData { mass = Mass });
 		}
 
-		public void UpdateMagneticField (float field)
-		{
-			if (Body == null) {
-				return;
-			}
-			Body.Force = b2Vec2.Zero;
-			var force = field * Body.LinearVelocity.UnitCross () * Charge * Consts.FieldScale;
-
-			force -= Consts.CounterForceScale * field * Body.LinearVelocity * Charge * Consts.FieldScale;
-
-			Body.ApplyForceToCenter (force);
-		}
-
 		public CloudChamber Chamber {
 			get { return (CloudChamber) Parent; }
 		}
@@ -113,6 +100,35 @@ namespace TrainJam2015
 			world.DestroyBody (Body);
 			Body.UserData = null;
 			Body = null;
+		}
+
+		Bubble lastBubble;
+
+		public override void Update (float dt)
+		{
+			const float bubbleSpacing = Consts.BaseParticleSize * 0.7f;
+
+			Age += dt;
+
+			if (lastBubble == null || (lastBubble.Position - Position).Length > bubbleSpacing) {
+				lastBubble = new Bubble (Position);
+				Parent.AddChild (lastBubble, -10);
+			}
+
+			UpdateMagneticField (Chamber.FieldStrength);
+		}
+
+		void UpdateMagneticField (float field)
+		{
+			if (Body == null) {
+				return;
+			}
+			Body.Force = b2Vec2.Zero;
+			var force = field * Body.LinearVelocity.UnitCross () * Charge * Consts.FieldScale;
+
+			force -= Consts.CounterForceScale * field * Body.LinearVelocity * Charge * Consts.FieldScale;
+
+			Body.ApplyForceToCenter (force);
 		}
 	}
 }

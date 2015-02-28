@@ -18,6 +18,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ContactFilter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Sounds.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ParticleData.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Bubble.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Content\" />
@@ -31,5 +32,6 @@
     <Content Include="$(MSBuildThisFileDirectory)Content\Audio\tone4.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Audio\tone5.mp3" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Audio\tone8.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\trail.png" />
   </ItemGroup>
 </Project>

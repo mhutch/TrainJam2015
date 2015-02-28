@@ -63,9 +63,6 @@ namespace TrainJam2015
 			AddParticle (ParticleData.A, center, new b2Vec2 (50, 0));
 			keyParticle = AddParticle (ParticleData.B, center + new CCPoint (-300, 0), new b2Vec2 (200, 0));
 
-			CCParticleSmoke s = new CCParticleSmoke (screenSize.Center);
-			s.Gravity = CCPoint.Zero;
-
 			Schedule (Tick);
 		}
 
@@ -89,6 +86,7 @@ namespace TrainJam2015
 				AddChild (particlesToAdd.Dequeue ());
 			}
 
+			//update physics
 			world.Step (dt, 8, 1);
 
 			for (var body = world.BodyList; body != null; body = body.Next) {
@@ -97,13 +95,10 @@ namespace TrainJam2015
 					continue;
 				var physicsPos = particle.Body.Position;
 				particle.Position = new CCPoint (physicsPos.x, physicsPos.y) * Consts.PhysicsScale;
-				particle.UpdateMagneticField (FieldStrength);
-				particle.Age += dt;
 			}
 
 			// Moving the camera means we need to move the UI and stuff too. We recenter the world instead.
-			// TODO: should we recenter the physics world too? maybe make it more stable
-
+			// We don't recenter the pysics because that's more complicated;
 			var newWorldOffset = (keyParticle.Position - screenSize.Center);
 			var worldDelta = newWorldOffset - worldOffset;
 			worldOffset = newWorldOffset;
@@ -114,6 +109,10 @@ namespace TrainJam2015
 				} else {
 					child.Position -= worldDelta;
 				}
+			}
+
+			foreach (var child in Children) {
+				child.Update (dt);
 			}
 		}
 

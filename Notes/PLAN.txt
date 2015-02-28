@@ -39,10 +39,10 @@ Work plan:
 * Audio [DONE]
 * Explosion effect [DONE]
 * Follow cam [DONE]
-* Animated background
-* Cloud tracks
+* Cloud tracks [DONE]
 * Particle spawning
 * Particle culling
+* Animated background
 * Particle polish
 * Background polish
 * Tracks polish
