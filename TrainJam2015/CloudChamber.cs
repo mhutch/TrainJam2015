@@ -78,17 +78,18 @@ namespace TrainJam2015
 			return p;
 		}
 
-		CCPoint worldOffset;
-
 		void Tick (float dt)
 		{
-			while (particlesToAdd.Count > 0) {
-				AddChild (particlesToAdd.Dequeue ());
-			}
-
-			//update physics
+			//update physics world
 			world.Step (dt, 8, 1);
 
+			//add any objects created during physics update
+			while (particlesToAdd.Count > 0) {
+				var child = particlesToAdd.Dequeue ();
+				AddChild (child);
+			}
+
+			//update sprite locations from physics world
 			for (var body = world.BodyList; body != null; body = body.Next) {
 				var particle = (Particle)body.UserData;
 				if (particle == null)
@@ -97,25 +98,16 @@ namespace TrainJam2015
 				particle.Position = new CCPoint (physicsPos.x, physicsPos.y) * Consts.PhysicsScale;
 			}
 
-			// Moving the camera means we need to move the UI and stuff too. We recenter the world instead.
-			// We don't recenter the pysics because that's more complicated;
-			var newWorldOffset = (keyParticle.Position - screenSize.Center);
-			var worldDelta = newWorldOffset - worldOffset;
-			worldOffset = newWorldOffset;
-
-			foreach (var child in Children) {
-				if (child is Particle) {
-					child.Position -= worldOffset;
-				} else {
-					child.Position -= worldDelta;
-				}
-			}
-
+			//recenter camera
+			var x = keyParticle.Position.X;
+			var y = keyParticle.Position.Y;
+			Camera.TargetInWorldspace = new CCPoint3 (x, y, Camera.TargetInWorldspace.Z);
+			Camera.CenterInWorldspace = new CCPoint3 (x, y, Camera.CenterInWorldspace.Z);
 			//cull children that got too far away
 			CCRect cullMask = new CCRect (
-				-screenSize.Width, -screenSize.Height,
-				screenSize.Width * 3,
-				screenSize.Height * 3
+				x -screenSize.Width, y -screenSize.Height,
+				screenSize.Width * 2,
+				screenSize.Height * 2
 			);
 			for (int i = 0; i < Children.Count; ) {
 				if (cullMask.ContainsPoint (Children [i].Position)) {
@@ -128,6 +120,10 @@ namespace TrainJam2015
 			foreach (var child in Children) {
 				child.Update (dt);
 			}
+
+			//spawn
+
+
 		}
 
 		public float FieldStrength { get; set; }
