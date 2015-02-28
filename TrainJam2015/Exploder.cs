@@ -72,6 +72,10 @@ namespace TrainJam2015
 				StartRadius = 0,
 				EndRadius = Consts.BaseParticleSize,
 				AutoRemoveOnFinish = true,
+				StartColor = new CCColor4F (1f, 1f, 0.5f, 0.8f),
+				StartColorVar = new CCColor4F (0.0f, 0.0f, 0f, 0.2f),
+				EndColor = new CCColor4F (0.6f, 0.2f, 0f, 0.0f),
+				EndColorVar = new CCColor4F (0.0f, 0.0f, 0f, 0.0f),
 			};
 			a.Parent.AddChild (explosion, -20);
 
