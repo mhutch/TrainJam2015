@@ -98,14 +98,19 @@ namespace TrainJam2015
 				particle.Position = new CCPoint (physicsPos.x, physicsPos.y) * Consts.PhysicsScale;
 			}
 
-			//recenter camera
-			var x = keyParticle.Position.X;
-			var y = keyParticle.Position.Y;
-			Camera.TargetInWorldspace = new CCPoint3 (x, y, Camera.TargetInWorldspace.Z);
-			Camera.CenterInWorldspace = new CCPoint3 (x, y, Camera.CenterInWorldspace.Z);
+			//center
+			var centerX = keyParticle.Position.X;
+			var centerY = keyParticle.Position.Y;
+
+			//recenter camera by transforming layer
+			this.AdditionalTransform = new CCAffineTransform (1, 0, 0, 1,
+				-centerX + screenSize.Width / 2f,
+				-centerY + screenSize.Height / 2f
+			);
+
 			//cull children that got too far away
-			CCRect cullMask = new CCRect (
-				x -screenSize.Width, y -screenSize.Height,
+			var cullMask = new CCRect (
+				centerX -screenSize.Width, centerY -screenSize.Height,
 				screenSize.Width * 2,
 				screenSize.Height * 2
 			);
