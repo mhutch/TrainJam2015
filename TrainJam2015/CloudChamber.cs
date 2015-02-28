@@ -36,6 +36,7 @@ namespace TrainJam2015
 		b2World world;
 		CCSize screenSize;
 		readonly Queue<Particle> particlesToAdd = new Queue<Particle> ();
+		Particle keyParticle;
 
 		public CloudChamber (CCSize size) : base (size)
 		{
@@ -60,7 +61,10 @@ namespace TrainJam2015
 			var center = screenSize.Center;
 
 			AddParticle (ParticleData.A, center, new b2Vec2 (50, 0));
-			AddParticle (ParticleData.B, center + new CCPoint (-300, 0), new b2Vec2 (200, 0));
+			keyParticle = AddParticle (ParticleData.B, center + new CCPoint (-300, 0), new b2Vec2 (200, 0));
+
+			CCParticleSmoke s = new CCParticleSmoke (screenSize.Center);
+			s.Gravity = CCPoint.Zero;
 
 			Schedule (Tick);
 		}
@@ -77,6 +81,8 @@ namespace TrainJam2015
 			return p;
 		}
 
+		CCPoint worldOffset;
+
 		void Tick (float dt)
 		{
 			while (particlesToAdd.Count > 0) {
@@ -87,13 +93,27 @@ namespace TrainJam2015
 
 			for (var body = world.BodyList; body != null; body = body.Next) {
 				var particle = (Particle)body.UserData;
-				if (particle == null) {
+				if (particle == null)
 					continue;
-				}
-				particle.Position = new CCPoint (body.Position.x, body.Position.y) * Consts.PhysicsScale;
-				particle.Rotation = -1 * CCMacros.CCRadiansToDegrees(body.Angle);
+				var physicsPos = particle.Body.Position;
+				particle.Position = new CCPoint (physicsPos.x, physicsPos.y) * Consts.PhysicsScale;
 				particle.UpdateMagneticField (FieldStrength);
 				particle.Age += dt;
+			}
+
+			// Moving the camera means we need to move the UI and stuff too. We recenter the world instead.
+			// TODO: should we recenter the physics world too? maybe make it more stable
+
+			var newWorldOffset = (keyParticle.Position - screenSize.Center);
+			var worldDelta = newWorldOffset - worldOffset;
+			worldOffset = newWorldOffset;
+
+			foreach (var child in Children) {
+				if (child is Particle) {
+					child.Position -= worldOffset;
+				} else {
+					child.Position -= worldDelta;
+				}
 			}
 		}
 

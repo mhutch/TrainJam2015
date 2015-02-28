@@ -38,8 +38,8 @@ Work plan:
 * Particle kinds [DONE]
 * Audio [DONE]
 * Explosion effect [DONE]
+* Follow cam [DONE]
 * Animated background
-* Follow cam
 * Cloud tracks
 * Particle spawning
 * Particle culling
