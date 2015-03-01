@@ -1,4 +1,4 @@
-﻿//
+﻿ //
 // Sounds.cs
 //
 // Author:
@@ -37,7 +37,9 @@ namespace TrainJam2015
 			foreach (var name in Enum.GetNames (typeof (Sound))) {
 				CCSimpleAudioEngine.SharedEngine.PreloadEffect (GetPath (name));
 			}
+			#if MAC
 			CCSimpleAudioEngine.SharedEngine.PreloadBackgroundMusic (musicName);
+			#endif
 		}
 
 		static string GetPath (string name)
@@ -57,12 +59,16 @@ namespace TrainJam2015
 
 		public static void PlayMusic ()
 		{
+			#if MAC
 			CCSimpleAudioEngine.SharedEngine.PlayBackgroundMusic (GetPath (musicName), true);
+			#endif
 		}
 
 		public static void StopMusic ()
 		{
+			#if MAC
 			CCSimpleAudioEngine.SharedEngine.StopBackgroundMusic ();
+			#endif
 		}
 	}
 
