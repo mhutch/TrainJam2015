@@ -77,7 +77,7 @@ namespace TrainJam2015
 
 			var fixtureDef = new b2FixtureDef {
 				shape = new b2CircleShape {
-					Radius = (ScaledContentSize.Width / Consts.PhysicsScale) * 0.5f * 0.68f
+					Radius = (ScaledContentSize.Width / Consts.PhysicsScale) * 0.5f
 				},
 				density = 0.0f,
 				friction = 0.0f,
