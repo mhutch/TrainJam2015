@@ -24,6 +24,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System;
+using CocosSharp;
 
 namespace TrainJam2015.Windows
 {
@@ -31,6 +32,7 @@ namespace TrainJam2015.Windows
 	{
 		public static int Main (string[] args)
 		{
+			new CCApplication { ApplicationDelegate = new AppDelegate () }.StartGame ();
 			return 0;
 		}
 	}

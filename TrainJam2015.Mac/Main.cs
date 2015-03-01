@@ -17,10 +17,7 @@ namespace TrainJam2015.Mac
 
 		public override void DidFinishLaunching (MonoMac.Foundation.NSNotification notification)
 		{
-			var application = new CCApplication (true) {
-				ApplicationDelegate = new AppDelegate ()
-			};
-			application.StartGame();
+			new CCApplication { ApplicationDelegate = new AppDelegate () }.StartGame ();
 		}
 
 		public override bool ApplicationShouldTerminateAfterLastWindowClosed (NSApplication sender)

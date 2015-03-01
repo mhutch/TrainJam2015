@@ -4,9 +4,9 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProjectGuid>{47E7E790-B3E6-4876-9E8A-6F110357957B}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <RootNamespace>TrainJam2015.Windows</RootNamespace>
-    <AssemblyName>TrainJam2015.Windows</AssemblyName>
+    <AssemblyName>CloudTracks</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -21,7 +21,6 @@
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
-    <DebugType>full</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
@@ -95,6 +94,6 @@
     Can't use DefiningProjectFullPath to determine shproj-relative path for content path
     right now since Mono < 4.0 doesn't implement it
     -->
-	<Copy SourceFiles="@(Content)" DestinationFolder="$(OutputPath)Content" />
+    <Copy SourceFiles="@(Content)" DestinationFolder="$(OutputPath)Content" />
   </Target>
 </Project>

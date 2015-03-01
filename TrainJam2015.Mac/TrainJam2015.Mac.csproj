@@ -8,7 +8,7 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>TrainJam2015.Mac</RootNamespace>
     <MonoMacResourcePrefix>Resources</MonoMacResourcePrefix>
-    <AssemblyName>TrainJam2015.Mac</AssemblyName>
+    <AssemblyName>CloudTracks</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
