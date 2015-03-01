@@ -42,8 +42,8 @@ namespace TrainJam2015
 
 		static string GetPath (string name)
 		{
-			// Mac apps don't place items into subdirectory when they come from a shproj
-			#if !MAC
+			// Currently build tasks don't place items into subdirectory when they come from a shproj
+			#if false
 			return System.IO.Path.Combine ("Audio", name);
 			#else
 			return name;

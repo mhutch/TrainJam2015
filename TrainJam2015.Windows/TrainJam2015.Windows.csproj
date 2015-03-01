@@ -89,4 +89,12 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
   </ItemGroup>
+  <Target Name="AfterBuild">
+    <MakeDir Directories="$(OutputPath)Content" />
+    <!--
+    Can't use DefiningProjectFullPath to determine shproj-relative path for content path
+    right now since Mono < 4.0 doesn't implement it
+    -->
+	<Copy SourceFiles="@(Content)" DestinationFolder="$(OutputPath)Content" />
+  </Target>
 </Project>

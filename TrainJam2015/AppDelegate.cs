@@ -49,8 +49,8 @@ namespace TrainJam2015
 
 			SoundPlayer.PreloadSounds ();
 
-			// Mac apps don't place items into subdirectory when they come from a shproj
-			#if !MAC
+			// Currently build tasks don't place items into subdirectory when they come from a shproj
+			#if false
 			application.ContentRootDirectory = "Content";
 			#endif
 
