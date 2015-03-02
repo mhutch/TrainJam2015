@@ -25,6 +25,10 @@
 // THE SOFTWARE.
 using System;
 using CocosSharp;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework;
+using System.Reflection;
+using System.Linq;
 
 namespace TrainJam2015
 {
@@ -58,6 +62,18 @@ namespace TrainJam2015
 			var layer = new SplashLayer (mainWindow.WindowSizeInPixels);
 			scene.AddChild (layer);
 			mainWindow.RunWithScene (scene);
+
+			//HACK: partly work around MonoGame fullscreen issues. still comes up behind taskbar
+			#if WINDOWS
+			var screen = System.Windows.Forms.Screen.AllScreens.First(e => e.Primary);
+			var window = (GameWindow) mainWindow.GetType ().GetProperty ("XnaWindow", BindingFlags.Instance | BindingFlags.NonPublic).GetValue (mainWindow);
+			window.IsBorderless = true;
+			window.Position = new Point(screen.Bounds.X, screen.Bounds.Y);
+			var form = ((System.Windows.Forms.Form)System.Windows.Forms.Control.FromHandle (window.Handle));
+			form.TopMost = true;
+			form.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+			form.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+			#endif
 		}
 	}
 

@@ -113,6 +113,7 @@ namespace TrainJam2015
 			const float scale = 4;
 			float unitField = (float) Math.Abs (cloudChamber.FieldStrength);
 			fieldIndicator.ScaleX = unitField * scale;
+			fieldIndicator.ScaleY = 0.6f;
 
 			float x = fieldIndicator.ContentSize.Width * scale;
 			if (negative) {
@@ -121,7 +122,7 @@ namespace TrainJam2015
 				x += fieldIndicator.ScaledContentSize.Width / 2;
 			}
 
-			fieldIndicator.Position = new CCPoint (x, 0);
+			fieldIndicator.Position = new CCPoint (x + 20, 50);
 		}
 	}
 }
