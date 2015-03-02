@@ -22,6 +22,12 @@ mkdir -p release/$PACKAGE_WINDOWS release/$PACKAGE_MAC
 cp -r README.md Screenshot.png $WINDIR/* release/$PACKAGE_WINDOWS || exit 1
 cp -r README.md Screenshot.png $MACDIR/*.app release/$PACKAGE_MAC || exit 1
 
+### HACK: MP3s don't work on MnoGame/CocsSharp on Windows
+### so special case copy wm/xnb files
+rm release/$PACKAGE_WINDOWS/Content/*.mp3
+cp TrainJam2015/Content/Audio-Windows/* release/$PACKAGE_WINDOWS/Content
+
+
 cd release
 7z u -tzip -r "${PACKAGE_WINDOWS}.zip" $PACKAGE_WINDOWS || exit 1
 7z u -tzip -r "${PACKAGE_MAC}.zip" $PACKAGE_MAC || exit 1

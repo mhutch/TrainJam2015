@@ -25,6 +25,10 @@
 // THE SOFTWARE.
 using System;
 using CocosDenshion;
+using CocosSharp;
+using Microsoft.Xna.Framework.Media;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Audio;
 
 namespace TrainJam2015
 {
@@ -32,13 +36,28 @@ namespace TrainJam2015
 	{
 		const string musicName = "chip4-2";
 
+		static Song song;
+		static SoundEffect[] effects;
+
+		//CCSimpleAudioEngine is broken on Windows
+		//and MediaPlayer/SoundEffect are broken on Mac
+		//yay
 		public static void PreloadSounds()
 		{
+			#if MAC
 			foreach (var name in Enum.GetNames (typeof (Sound))) {
 				CCSimpleAudioEngine.SharedEngine.PreloadEffect (GetPath (name));
 			}
-			#if MAC
 			CCSimpleAudioEngine.SharedEngine.PreloadBackgroundMusic (musicName);
+			#else
+			var cm = new ContentManager (CCContentManager.SharedContentManager.ServiceProvider) { RootDirectory = "Content" };
+			song = cm.Load<Song> (GetPath (musicName));
+
+			var effectIds = Enum.GetValues ((typeof(Sound)));
+			effects = new SoundEffect[effectIds.Length];
+			foreach (Sound val in effectIds) {
+				effects [(int)val] = cm.Load<SoundEffect> (GetPath (val.ToString ()));
+			}
 			#endif
 		}
 
@@ -54,13 +73,20 @@ namespace TrainJam2015
 
 		public static void Play (this Sound sound)
 		{
+			#if MAC
 			CCSimpleAudioEngine.SharedEngine.PlayEffect (GetPath (sound.ToString().ToLower()));
+			#else
+			effects [(int)sound].Play (0.2f, 0f, 0f);
+			#endif
 		}
 
 		public static void PlayMusic ()
 		{
 			#if MAC
 			CCSimpleAudioEngine.SharedEngine.PlayBackgroundMusic (GetPath (musicName), true);
+			#else
+			MediaPlayer.IsRepeating = true;
+			MediaPlayer.Play (song);
 			#endif
 		}
 
@@ -68,6 +94,8 @@ namespace TrainJam2015
 		{
 			#if MAC
 			CCSimpleAudioEngine.SharedEngine.StopBackgroundMusic ();
+			#else
+			MediaPlayer.Stop ();
 			#endif
 		}
 	}
