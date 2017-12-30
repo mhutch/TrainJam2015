@@ -52,7 +52,7 @@ Eiríkr Åsheim
 
 #### Code and Art
 
-Copyright (c) 2015 Michael Hutchinson.
+Copyright (c) 2015 Mikayla Hutchinson.
 
 Released under the [MIT/X11](http://opensource.org/licenses/MIT) license.
 
