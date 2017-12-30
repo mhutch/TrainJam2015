@@ -30,17 +30,17 @@ current field strength.
 
 ### Credits
 
-####Design, Programming and Art
+#### Design, Programming and Art
 
 Mikayla Hutchinson
 ([@mjhutchinson](https://twitter.com/mjhutchinson))  
 
-####Music and Sound
+#### Music and Sound
 
 Nick Weihs
 ([@nickweihs](https://twitter.com/nickweihs))
 
-####Special Thanks
+#### Special Thanks
 
 Adriel Wallick
 ([@msminotaur](https://twitter.com/msminotaur))
@@ -50,12 +50,12 @@ Eiríkr Åsheim
 
 ### License
 
-####Code and Art
+#### Code and Art
 
 Copyright (c) 2015 Michael Hutchinson.
 
 Released under the [MIT/X11](http://opensource.org/licenses/MIT) license.
 
-####Music and Sound
+#### Music and Sound
 
 Copyright (c) 2015 Nick Weihs.
