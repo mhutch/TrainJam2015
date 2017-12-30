@@ -32,7 +32,7 @@ current field strength.
 
 ####Design, Programming and Art
 
-Michael '[mhutch](https://mhut.ch)' Hutchinson
+Mikayla Hutchinson
 ([@mjhutchinson](https://twitter.com/mjhutchinson))  
 
 ####Music and Sound
