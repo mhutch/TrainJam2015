@@ -1,5 +1,7 @@
 This is the TrainJam 2015 game [Cloud Tracks](https://github.com/mhutch/TrainJam2015)!
 
+Binaries are available at https://mhutch.itch.io/cloud-tracks
+
 ### Description
 
 Control a magnetic field to steer particles around inside a cloud
